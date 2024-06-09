@@ -1,0 +1,14 @@
+# Python compilation files:
+*.py[cod]
+__python__/*
+
+# Compiled language files:
+*.mo
+*.pot
+
+# IDE specific files:
+.idea
+venv
+
+# Database files:
+*.sqlite3
