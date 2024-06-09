@@ -1,0 +1,18 @@
+{% load i18n css %}
+
+{% get_current_language as CURRENT_LANGUAGE_CODE %}
+
+<!DOCTYPE html>
+<html lang="{{ CURRENT_LANGUAGE_CODE }}">
+<head>
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+    <style>
+        {% block style %}
+            {{ 'style/pdf.css'|css }}
+        {% endblock style %}
+    </style>
+</head>
+<body>
+{{ pages_html|safe }}
+</body>
+</html>
