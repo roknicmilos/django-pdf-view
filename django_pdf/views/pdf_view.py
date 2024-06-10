@@ -1,4 +1,5 @@
 import os
+from abc import abstractmethod
 
 from django.http import HttpResponse, FileResponse
 from django.views import View
@@ -11,7 +12,7 @@ class PDFView(View):
     def get(self, *args, **kwargs):
         os.environ['QT_QPA_PLATFORM'] = 'offscreen'
 
-        pdf = self._create_pdf()
+        pdf = self.create_pdf()
 
         if self.request.GET.get('html') == 'true':
             return HttpResponse(
@@ -27,15 +28,6 @@ class PDFView(View):
 
         return response
 
-    @staticmethod
-    def _create_pdf() -> PDF:
-        pdf = PDF(
-            template_name='example/pdf_example.html',
-            title='Example PDF',
-        )
-
-        pdf.add_page(template_name='example/page_example.html')
-        pdf.add_page(template_name='example/page_example.html')
-        pdf.add_page(template_name='example/page_example.html')
-
-        return pdf
+    @abstractmethod
+    def create_pdf(self) -> PDF:
+        pass
