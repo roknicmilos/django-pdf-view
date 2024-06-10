@@ -3,14 +3,16 @@
 {% load i18n %}
 
 {% block content %}
-    <h1>{% trans 'Page' %} {{ page_number }}</h1>
-    <p class="page-example__text">
-        {% if page_number == 1 %}
-            {% trans "Did you know that the same template is used for all pages in this document?" %}
-        {% elif page_number == 2 %}
-            {% trans "Seriously! Even this page uses the same template as the first one." %}
-        {% elif page_number == 3 %}
-            {% trans "But I think you'll probably want to use a different template for different pages." %}
-        {% endif %}
-    </p>
+    <div class="pdf-example__wrapper">
+        <h1>{% trans 'Page' %} {{ page_number }} / {{ total_pages }}</h1>
+        <p class="page-example__text">
+            {% if page_number == 1 %}
+                {% trans "Did you know that the same template is used for all pages in this document?" %}
+            {% elif page_number == 2 %}
+                {% trans "Seriously! Even this page uses the same template as the first one." %}
+            {% elif page_number == 3 %}
+                {% trans "But I think you'll probably want to use a different template for different pages." %}
+            {% endif %}
+        </p>
+    </div>
 {% endblock content %}

@@ -1,3 +1,5 @@
+import os
+
 from django.http import HttpResponse, FileResponse
 from django.views import View
 
@@ -5,7 +7,10 @@ from django_pdf.pdf import PDF
 
 
 class PDFView(View):
+
     def get(self, *args, **kwargs):
+        os.environ['QT_QPA_PLATFORM'] = 'offscreen'
+
         pdf = self._create_pdf()
 
         if self.request.GET.get('html') == 'true':
@@ -14,10 +19,12 @@ class PDFView(View):
                 content_type='text/html',
             )
 
-        # TODO: FIX THIS!
         response = FileResponse(pdf.in_memory_pdf, filename=pdf.filename)
-        content_disposition = f'attachment; filename="{pdf.filename}"'
-        response['Content-Disposition'] = content_disposition
+
+        if self.request.GET.get('download') == 'true':
+            content_disposition = f'attachment; filename="{pdf.filename}"'
+            response['Content-Disposition'] = content_disposition
+
         return response
 
     @staticmethod

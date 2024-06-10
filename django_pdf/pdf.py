@@ -57,10 +57,13 @@ class PDF:
         )
 
     def get_context(self) -> dict:
-        pages_html = ''.join([page.render_html() for page in self.pages])
+        total_pages = len(self._pages)
+        pages_html = ''.join([
+            page.render_html(total_pages=total_pages) for page in self.pages
+        ])
         return {
             'pages_html': pages_html,
-            'title': self.get_title()
+            'title': self.get_title(),
         }
 
     def get_title(self) -> str:

@@ -1,11 +1,12 @@
 body {
-    font-family: Roboto, sans-serif;
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
 .pdf-page {
-    padding: 75px 100px;
-    min-height: 1276px;
-    max-height: 1276px;
+    width: 1000px;
+    height: 1380px;
+    margin: 10px auto;
+    background: white;
+    break-after: page;
 }
