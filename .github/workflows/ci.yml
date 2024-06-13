@@ -32,6 +32,14 @@ jobs:
           source venv/bin/activate
           python manage.py migrate
 
+      - name: TMP
+        run: |
+          ls -la
+          cd django_pdf
+          ls -la
+          cd tests
+          ls -la
+
       - name: Run tests
         run: |
           source venv/bin/activate
