@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - '**'  # Run on all branches
-  pull_request:
-    branches:
-      - '**'  # Run on all branches
 
 jobs:
   test:
@@ -31,14 +28,6 @@ jobs:
         run: |
           source venv/bin/activate
           python manage.py migrate
-
-      - name: TMP
-        run: |
-          ls -la
-          cd django_pdf
-          ls -la
-          cd tests
-          ls -la
 
       - name: Run tests
         run: |
