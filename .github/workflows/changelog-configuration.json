@@ -1,0 +1,57 @@
+{
+  "pr_template": "- #{{TITLE}} ##{{NUMBER}}",
+  "template": "#{{CHANGELOG}}\n## Extra information\n- Full Changelog: #{{RELEASE_DIFF}}\n- Days since last release: #{{DAYS_SINCE}}",
+  "ignore_labels": [],
+  "sort": {
+    "order": "ASC",
+    "on_property": "mergedAt"
+  },
+  "categories": [
+    {
+      "title": "## ✨ Features",
+      "labels": [
+        "feature"
+      ]
+    },
+    {
+      "title": "## 🛠 Improvements",
+      "labels": [
+        "improvement"
+      ]
+    },
+    {
+      "title": "## 🐛 Bug Fixes",
+      "labels": [
+        "bug"
+      ]
+    },
+    {
+      "title": "## 📦 Dependencies",
+      "labels": [
+        "dependencies"
+      ]
+    },
+    {
+      "title": "## 📖 Documentation",
+      "labels": [
+        "documentation"
+      ]
+    },
+    {
+      "title": "## ❓ Uncategorized",
+      "exclude_labels": [
+        "feature",
+        "improvement",
+        "bug",
+        "dependencies",
+        "documentation"
+      ],
+      "rules": [
+        {
+          "pattern": "",
+          "on_property": "labels"
+        }
+      ]
+    }
+  ]
+}
