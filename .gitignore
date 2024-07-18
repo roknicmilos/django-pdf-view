@@ -8,7 +8,10 @@ __python__/*
 
 # IDE specific files:
 .idea
+
+# Virtual environment:
 venv
+.venv
 
 # Database files:
 *.sqlite3
