@@ -52,7 +52,9 @@ downloading them based on URL parameters.
    ```
 
 6. **Open Example PDF in the Browser**:
-   [http://127.0.0.1:8000/pdf/example](http://127.0.0.1:8000/pdf/example)
+    - PDF: [http://127.0.0.1:8000/pdf/example](http://127.0.0.1:8000/pdf/example)
+    - HTML: [http://127.0.0.1:8000/pdf/example?html=true](http://127.0.0.1:8000/pdf/example?html=true)
+    - Download PDF: [http://127.0.0.1:8000/pdf/example?download=true](http://127.0.0.1:8000/pdf/example?download=true)
 
 ## Running Tests
 
