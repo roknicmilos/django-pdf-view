@@ -6,7 +6,8 @@ on:
       - '**'  # Run on all branches
 
 jobs:
-  test:
+  ci:
+    name: CI
     runs-on: ubuntu-latest
 
     steps:
@@ -20,16 +21,23 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo apt-get update
+          sudo apt-get install -y wkhtmltopdf
           python -m venv venv
           source venv/bin/activate
-          pip install -r requirements.txt
+          pip install -r requirements/dev.txt
 
       - name: Run migrations
         run: |
           source venv/bin/activate
           python manage.py migrate
 
+      - name: Run linter
+        run: |
+          source venv/bin/activate
+          flake8 . && echo "Linting passed"
+
       - name: Run tests
         run: |
           source venv/bin/activate
-          python manage.py test
+          pytest
