@@ -1,18 +1,22 @@
-name: 'Releases'
+name: "Releases"
+
+permissions:
+  contents: write
+
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
   release:
     if: startsWith(github.ref, 'refs/tags/')
+    name: Create New Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
-      - name: Build Changelog
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Generate Changelog
         id: github_release
         uses: mikepenz/release-changelog-builder-action@v4
         env:
