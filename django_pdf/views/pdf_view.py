@@ -9,9 +9,11 @@ from django_pdf.pdf import PDF
 
 class PDFView(View):
 
-    def get(self, *args, **kwargs):
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
         os.environ['QT_QPA_PLATFORM'] = 'offscreen'
 
+    def get(self, *args, **kwargs):
         pdf = self.create_pdf()
 
         if self.request.GET.get('html') == 'true':
@@ -30,4 +32,4 @@ class PDFView(View):
 
     @abstractmethod
     def create_pdf(self) -> PDF:
-        pass
+        pass  # pragma: no cover
