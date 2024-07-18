@@ -38,13 +38,20 @@
       ]
     },
     {
+      "title": "## 🧪 Tests",
+      "labels": [
+        "tests"
+      ]
+    },
+    {
       "title": "## ❓ Uncategorized",
       "exclude_labels": [
         "feature",
         "improvement",
         "bug",
         "dependencies",
-        "documentation"
+        "documentation",
+        "tests"
       ],
       "rules": [
         {
