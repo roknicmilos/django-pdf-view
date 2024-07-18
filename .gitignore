@@ -15,3 +15,6 @@ venv
 
 # Database files:
 *.sqlite3
+
+# Code coverage:
+.coverage
