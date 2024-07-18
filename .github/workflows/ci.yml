@@ -22,7 +22,7 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
-          pip install -r requirements.txt
+          pip install -r requirements/dev.txt
 
       - name: Run migrations
         run: |
@@ -32,4 +32,4 @@ jobs:
       - name: Run tests
         run: |
           source venv/bin/activate
-          python manage.py test
+          pytest
