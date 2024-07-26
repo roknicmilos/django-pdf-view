@@ -97,9 +97,9 @@ your own templates and view.
 2. Create a new template to define the content of your PDF page:
 
     ```html
-    <!-- my_app/templates/my_app/pdf_page.html -->
+    <!-- my_app/templates/my_app/page.html -->
 
-    {% extends 'django_pdf/pdf_page.html' %}
+    {% extends 'django_pdf/page.html' %}
     
     {% block content %}
         <h1 class=".my-title">{{ title }}</h1>
@@ -108,7 +108,7 @@ your own templates and view.
     {% endblock content %}
     ```
    **_Breakdown_**:
-    - We extend the base `django_pdf/pdf_page.html` template to inherit
+    - We extend the base `django_pdf/page.html` template to inherit
       the basic structure and CSS.
     - We override the `content` block to include our custom content.
       Some of this content is passed as context to the template
@@ -138,7 +138,7 @@ your own templates and view.
            )
    
            pdf.add_page(
-                template_name='my_app/pdf_page.html',
+                template_name='my_app/page.html',
                 title='My PDF Page',
                 text='This is my PDF page text.',
            )
