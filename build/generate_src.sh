@@ -20,6 +20,6 @@ echo "\tCopying 'django_pdf' app to 'src'..."
 cp -r "$ROOT_DIR/django_pdf" "$SRC_DIR"
 
 echo "\tCopying meta files into 'src'..."
-cp "$BUILD_DIR/assets/"* "$SRC_DIR"
+cp "$BUILD_DIR/meta/"* "$SRC_DIR"
 
 echo "Finished preparing source files."
