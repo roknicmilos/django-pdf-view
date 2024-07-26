@@ -18,3 +18,8 @@ venv
 
 # Code coverage:
 .coverage
+
+# Folder that should contain generated
+# source files for builidng distribution
+# files:
+build/src
