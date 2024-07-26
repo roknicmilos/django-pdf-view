@@ -5,6 +5,11 @@ The project includes an application with classes, views, and
 templates for creating and displaying PDFs in the browser or
 downloading them based on URL parameters.
 
+## Standalone Usage
+
+If you want to install `django-pdf` as a standalone package in your
+Django project, refer to [build/meta/README.md](build/meta/README.md).
+
 ## Getting Started
 
 ### Prerequisites
@@ -63,3 +68,13 @@ To run the tests, use the following command:
 ```bash
 python manage.py test
 ```
+
+## Bugs/Requests
+
+If you encounter any bugs or have any requests, please use
+[GitHub issue tracker](https://github.com/roknicmilos/django-pdf/issues)
+to report them.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
