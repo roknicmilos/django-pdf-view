@@ -8,7 +8,7 @@ from django_pdf.views import PDFView
 
 class ConcretePDFView(PDFView):
     sample_pdf = PDF(
-        template_name='pdf.html',
+        template_name='django_pdf/pdf.html',
         language='en',
         filename='test.pdf',
         title='Test PDF'

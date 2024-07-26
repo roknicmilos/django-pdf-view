@@ -12,10 +12,16 @@ class TestExamplePDFView(TestCase):
 
         self.assertEqual(pdf.get_title(), 'Example PDF')
         self.assertEqual(pdf.get_filename(), 'pdf_example.pdf')
-        self.assertEqual(pdf.template_name, 'example/pdf_example.html')
+        self.assertEqual(
+            pdf.template_name,
+            'django_pdf/example/pdf_example.html'
+        )
         self.assertEqual(len(pdf.pages), 3)
         for page in pdf.pages:
-            self.assertEqual(page.template_name, 'example/page_example.html')
+            self.assertEqual(
+                page.template_name,
+                'django_pdf/example/page_example.html'
+            )
 
     def test_get_pdf(self):
         response = self.client.get('/pdf/example/')

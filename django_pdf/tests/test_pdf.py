@@ -58,8 +58,8 @@ class TestPDF(TestCase):
     @patch('django_pdf.pdf.from_string')
     def test_in_memory_pdf(self, mock_from_string):
         mock_from_string.return_value = b'PDF content'
-        pdf = PDF(template_name='pdf.html')
-        pdf.add_page(template_name='pdf_page.html')
+        pdf = PDF(template_name='django_pdf/pdf.html')
+        pdf.add_page(template_name='django_pdf/pdf_page.html')
         in_memory_pdf = pdf.in_memory_pdf
         self.assertIsInstance(in_memory_pdf, BytesIO)
         self.assertEqual(in_memory_pdf.getvalue(), b'PDF content')

@@ -1,0 +1,8 @@
+{% extends 'django_pdf/pdf.html' %}
+
+{% load css %}
+
+{% block style %}
+    {{ block.super }}
+    {{ 'django_pdf/style/example/pdf_example.css'|css }}
+{% endblock style %}
