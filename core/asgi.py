@@ -1,5 +1,5 @@
 """
-ASGI config for "Django PDF" project.
+ASGI config for "Django PDF View" project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

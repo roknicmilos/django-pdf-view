@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from django_pdf.pdf_page import PDFPage
+from django_pdf_view.pdf_page import PDFPage
 
 
 class TestPDFPage(TestCase):
@@ -26,7 +26,7 @@ class TestPDFPage(TestCase):
         self.assertEqual(pdf_page.number, 1)
         self.assertEqual(pdf_page.context, {'foo': 'bar'})
 
-    @patch('django_pdf.pdf_page.render_to_string')
+    @patch('django_pdf_view.pdf_page.render_to_string')
     def test_render_html_with_wrapper_html(self, mock_render_pdf_to_string):
         """
         If with_wrapper_html is True (default), render_html should
@@ -47,7 +47,7 @@ class TestPDFPage(TestCase):
         )
         self.assertEqual(html, expected_html)
 
-    @patch('django_pdf.pdf_page.render_to_string')
+    @patch('django_pdf_view.pdf_page.render_to_string')
     def test_render_html_without_wrapper_html(self, mock_render_pdf_to_string):
         """
         If with_wrapper_html is False, render_html should return the

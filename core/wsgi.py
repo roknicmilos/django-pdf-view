@@ -1,5 +1,5 @@
 """
-WSGI config for "Django PDF" project.
+WSGI config for "Django PDF View" project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

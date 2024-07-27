@@ -2,13 +2,13 @@ import os
 
 from django.test import TestCase, RequestFactory
 
-from django_pdf.pdf import PDF
-from django_pdf.views import PDFView
+from django_pdf_view.pdf import PDF
+from django_pdf_view.views import PDFView
 
 
 class ConcretePDFView(PDFView):
     sample_pdf = PDF(
-        template_name='django_pdf/pdf.html',
+        template_name='django_pdf_view/pdf.html',
         language='en',
         filename='test.pdf',
         title='Test PDF'

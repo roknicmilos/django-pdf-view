@@ -2,8 +2,8 @@ from unittest import TestCase
 from unittest.mock import patch
 from io import BytesIO
 
-from django_pdf.pdf import PDF
-from django_pdf.pdf_page import PDFPage
+from django_pdf_view.pdf import PDF
+from django_pdf_view.pdf_page import PDFPage
 
 
 class TestPDF(TestCase):
@@ -11,7 +11,7 @@ class TestPDF(TestCase):
     def setUp(self):
         super().setUp()
         self.render_page_html_patcher = patch(
-            target='django_pdf.pdf_page.PDFPage.render_html',
+            target='django_pdf_view.pdf_page.PDFPage.render_html',
             return_value='<div>PDF Page</div>'
         )
         self.mock_render_page_html = self.render_page_html_patcher.start()
@@ -36,7 +36,7 @@ class TestPDF(TestCase):
         self.assertIsInstance(pdf.pages[0], PDFPage)
         self.assertEqual(pdf.pages[0].template_name, 'pdf_page.html')
 
-    @patch('django_pdf.pdf.render_to_string')
+    @patch('django_pdf_view.pdf.render_to_string')
     def test_render_html(self, mock_render_pdf_to_string):
         mock_render_pdf_to_string.return_value = '<html>PDF</html>'
         pdf = PDF(
@@ -55,11 +55,11 @@ class TestPDF(TestCase):
         self.mock_render_page_html.assert_called_once()
         self.assertEqual(html, '<html>PDF</html>')
 
-    @patch('django_pdf.pdf.from_string')
+    @patch('django_pdf_view.pdf.from_string')
     def test_in_memory_pdf(self, mock_from_string):
         mock_from_string.return_value = b'PDF content'
-        pdf = PDF(template_name='django_pdf/pdf.html')
-        pdf.add_page(template_name='django_pdf/pdf_page.html')
+        pdf = PDF(template_name='django_pdf_view/pdf.html')
+        pdf.add_page(template_name='django_pdf_view/pdf_page.html')
         in_memory_pdf = pdf.in_memory_pdf
         self.assertIsInstance(in_memory_pdf, BytesIO)
         self.assertEqual(in_memory_pdf.getvalue(), b'PDF content')

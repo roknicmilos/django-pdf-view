@@ -2,7 +2,7 @@ from django.http import FileResponse
 from django.test import TestCase
 from django.urls import reverse_lazy
 
-from django_pdf.views import SinglepageExamplePDFView
+from django_pdf_view.views import SinglepageExamplePDFView
 
 
 class TestSinglepageExamplePDFView(TestCase):
@@ -14,11 +14,11 @@ class TestSinglepageExamplePDFView(TestCase):
 
         self.assertEqual(pdf.get_title(), 'Singlepage Example PDF')
         self.assertEqual(pdf.get_filename(), 'singlepage_example_pdf.pdf')
-        self.assertEqual(pdf.template_name, 'django_pdf/pdf.html')
+        self.assertEqual(pdf.template_name, 'django_pdf_view/pdf.html')
         self.assertEqual(len(pdf.pages), 1)
         self.assertEqual(
             pdf.pages[0].template_name,
-            'django_pdf/examples/singlepage.html'
+            'django_pdf_view/examples/singlepage.html'
         )
 
     def test_get_pdf(self):

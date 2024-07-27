@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
    ```python
    from django.urls import path
-   from django_pdf import views
+   from django_pdf_view import views
    
    urlpatterns = [
        path(
@@ -107,9 +107,9 @@ your own template and view.
    ```python
    # my_app/views.py
    
-   from django_pdf.pdf import PDF
-   from django_pdf.services import create_pdf
-   from django_pdf.views.pdf_view import PDFView
+   from django_pdf_view.pdf import PDF
+   from django_pdf_view.services import create_pdf
+   from django_pdf_view.views.pdf_view import PDFView
    
    
    class MyPDFView(PDFView):

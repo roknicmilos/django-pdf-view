@@ -4,13 +4,13 @@ from django.template.loader import render_to_string
 from django.utils import translation
 from pdfkit import from_string
 
-from django_pdf.pdf_page import PDFPage
-from django_pdf.utils import override_language
+from django_pdf_view.pdf_page import PDFPage
+from django_pdf_view.utils import override_language
 
 
 class PDF:
     page_class = PDFPage
-    default_template_name = 'django_pdf/pdf.html'
+    default_template_name = 'django_pdf_view/pdf.html'
 
     def __init__(
         self,

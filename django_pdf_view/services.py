@@ -1,4 +1,4 @@
-from django_pdf.pdf import PDF
+from django_pdf_view.pdf import PDF
 
 
 def create_pdf(

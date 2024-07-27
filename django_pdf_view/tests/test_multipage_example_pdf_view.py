@@ -2,7 +2,7 @@ from django.http import FileResponse
 from django.test import TestCase
 from django.urls import reverse_lazy
 
-from django_pdf.views import MultipageExamplePDFView
+from django_pdf_view.views import MultipageExamplePDFView
 
 
 class TestMultipageExamplePDFView(TestCase):
@@ -14,12 +14,12 @@ class TestMultipageExamplePDFView(TestCase):
 
         self.assertEqual(pdf.get_title(), 'Multipage Example PDF')
         self.assertEqual(pdf.get_filename(), 'multipage_example_pdf.pdf')
-        self.assertEqual(pdf.template_name, 'django_pdf/pdf.html')
+        self.assertEqual(pdf.template_name, 'django_pdf_view/pdf.html')
         self.assertEqual(len(pdf.pages), 3)
         for page in pdf.pages:
             self.assertEqual(
                 page.template_name,
-                f'django_pdf/examples/multipage_{page.number}.html'
+                f'django_pdf_view/examples/multipage_{page.number}.html'
             )
 
     def test_get_pdf(self):
