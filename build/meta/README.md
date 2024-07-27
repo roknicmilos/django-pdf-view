@@ -1,8 +1,11 @@
-# django-pdf
+# django-pdf-view
 
-**Django PDF** is a Django app with classes, views, and
-templates for creating and displaying PDFs in the browser or
-downloading them based on URL parameters.
+**Django PDF View** is a Django app with classes, views, and
+templates for seamlessly generating and displaying PDFs in the
+browser or downloading them based on URL parameters.
+Simply create an HTML template for your PDF document, a view
+that inherits from `PDFView` and implements the `create_pdf`
+method that returns a `PDF` object with the desired content.
 
 ## Prerequisites
 
@@ -21,17 +24,17 @@ downloading them based on URL parameters.
 ## Installation
 
 ```bash
-pip install django-pdf
+pip install django-pdf-view
 ```
 
 ## Configuration
 
-Add `django-pdf` to your `INSTALLED_APPS` in `settings.py`:
+Add `django-pdf-view` to your `INSTALLED_APPS` in `settings.py`:
 
 ```python
 INSTALLED_APPS = [
     ...
-    'django_pdf',
+    'django_pdf_view',
     ...
 ]
 ```
@@ -153,3 +156,74 @@ your own template and view.
     - To view the HTML version, append `?html=true` to the URL:
       [http://localhost:8000/my_pdf/?html=true](http://localhost:8000/my_pdf/?html=true)
       <br/><br/>
+
+## Advanced Usage
+
+To have more control over the PDF generation process, instead of
+using the `create_pdf` helper function, you can create a PDF object
+manually and add pages to it:
+
+```python
+from django_pdf_view.pdf import PDF
+
+pdf = PDF(
+    template_name='my_app/pdf.html',
+    title='My PDF Document',
+    language='rs',
+    filename='my-pdf.pdf',
+)
+# Add first page:
+pdf.add_page(
+    template_name='my_app/pdf_page_1.html',
+    with_wrapper_html=False,
+    context={
+        'title': 'Page 1 Title',
+        'text': 'Page 1 Text',
+    }
+)
+# Add second page:
+pdf.add_page(
+    template_name='my_app/pdf_page_1.html',
+    with_wrapper_html=False,
+    context={
+        'title': 'Page 1 Title',
+        'text': 'Page 1 Text',
+    }
+)
+
+```
+
+**_Breakdown_**:
+
+- We create a new `PDF` object with a `template_name` for the
+  document, a `title` (optional) for the document, a `language`
+  (optional) for the document, and a `filename` (optional) for the
+  PDF file.
+- We add two pages to the PDF object by providing a `template_name`
+  for each page, `with_wrapper_html=False` (optional) to omit wrapper
+  HTML that is added to each page, and a `context` (optional) for
+  each page template.
+
+### Default template context
+
+- PDF document:
+    - `pages_html`: HTML content of all pages.
+    - `title`: Title of the PDF document (used in `<title>` tag).
+- PDF page:
+    - `title`: Title of the PDF page.
+    - `page_number`: Number of the PDF page.
+    - `total_pages`: Total number of pages in the PDF document.
+
+### Custom template for PDF document
+
+If we decide to use our own template for the PDF document, we need
+to include `{{ pages_html|safe }}` in the template to render the
+content of the PDF pages.
+
+### Custom CSS for PDF document
+
+To add some global styles to the PDF document that will be
+applied to all pages, we can define it directly in `<style>`
+(inside `<head>` tag) in the PDF document template. Alternatively,
+we can define it in a separate CSS file and render it in the
+template using the `{{ 'my_app/style/pdf.css'|css }}` template tag.

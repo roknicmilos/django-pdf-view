@@ -2,7 +2,7 @@ from django.urls import path
 
 from django_pdf_view import views
 
-app_name = 'django-pdf'
+app_name = 'django-pdf-view'
 
 urlpatterns = [
     path(

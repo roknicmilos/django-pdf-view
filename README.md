@@ -1,14 +1,16 @@
-# Django PDF
+# Django PDF View
 
-**Django PDF** is a Django project designed to generate PDF files.
+**Django PDF View** is a Django project designed to generate
+PDF files.
 The project includes an application with classes, views, and
 templates for creating and displaying PDFs in the browser or
 downloading them based on URL parameters.
 
 ## Standalone Usage
 
-If you want to install `django-pdf` as a standalone package in your
-Django project, refer to [build/meta/README.md](build/meta/README.md).
+If you want to install `django-pdf-view` as a standalone 
+package in your Django project, refer to 
+[build/meta/README.md](build/meta/README.md).
 
 ## Getting Started
 
@@ -32,7 +34,7 @@ Django project, refer to [build/meta/README.md](build/meta/README.md).
 1. **Clone the Project**:
    ```bash
    git clone <repository-url>
-   cd django-pdf
+   cd django-pdf-view
    ```
 
 2. **Create and activate Virtual Environment**:
@@ -73,7 +75,7 @@ pytest
 ## Bugs/Requests
 
 If you encounter any bugs or have any requests, please use
-[GitHub issue tracker](https://github.com/roknicmilos/django-pdf/issues)
+[GitHub issue tracker](https://github.com/roknicmilos/django-pdf-view/issues)
 to report them.
 
 ## Contributing

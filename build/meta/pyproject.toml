@@ -3,9 +3,9 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "django-pdf"
+name = "django-pdf-view"
 version = "1.0.0"
-description = "Django app for generating PDFs"
+description = "Django app for seamlessly displaying and downloading PDF documents in browser."
 readme = "README.md"
 requires-python = ">=3.6"
 license = { text = "MIT" }
@@ -35,4 +35,4 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/roknicmilos/django-pdf"
+Homepage = "https://github.com/roknicmilos/django-pdf-view"

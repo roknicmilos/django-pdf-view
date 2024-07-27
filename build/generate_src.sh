@@ -16,8 +16,8 @@ fi
 echo "\tCreating 'src' directory..."
 mkdir -p "$SRC_DIR"
 
-echo "\tCopying 'django_pdf' app to 'src'..."
-cp -r "$ROOT_DIR/django_pdf" "$SRC_DIR"
+echo "\tCopying 'django_pdf_view' app to 'src'..."
+cp -r "$ROOT_DIR/django_pdf_view" "$SRC_DIR"
 
 echo "\tCopying meta files into 'src'..."
 cp "$BUILD_DIR/meta/"* "$SRC_DIR"

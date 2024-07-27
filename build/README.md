@@ -1,6 +1,6 @@
-# Release a new django-pdf version
+# Release a new django-pdf-view version
 
-When changes are made to the `django_pdf` app that need
+When changes are made to the `django_pdf_view` app that need
 to be reflected in the published package, or some metadata
 needs to be updated (`build/meta/*` files), a **new package
 version should be built and uploaded to PyPI**.
