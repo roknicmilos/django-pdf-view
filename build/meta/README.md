@@ -84,14 +84,15 @@ your own template and view.
 
    ```html
    <!-- my_app/templates/my_app/pdf_page.html -->
+   {% load css %}   
    
    <style>
        {{ 'my_app/style/pdf_page.css'|css }}
    </style>
    
-   <h1 class=".my-title">{{ title }}</h1>
-   <p class=".my-text">{{ text }}</p>
-   <p class=".my-text">Additional PDF page text.</p>
+   <h1 class="my-title">{{ title }}</h1>
+   <p class="my-text">{{ text }}</p>
+   <p class="my-text">Additional PDF page text.</p>
    ```
    **_Breakdown_**:
     - We render the content of a custom CSS file
