@@ -1,0 +1,12 @@
+{% load i18n css %}
+
+<style>
+    {{ 'django_pdf/style/example.css'|css }}
+</style>
+
+<div class="pdf-example__wrapper">
+    <h1>{% trans 'Page' %} {{ page_number }} / {{ total_pages }}</h1>
+    <p class="page-example__text">
+        {% trans "If you want to create a PDF document with multiple pages..." %}
+    </p>
+</div>

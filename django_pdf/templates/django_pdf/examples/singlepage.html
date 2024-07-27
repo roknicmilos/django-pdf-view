@@ -1,0 +1,12 @@
+{% load i18n css %}
+
+<style>
+    {{ 'django_pdf/style/example.css'|css }}
+</style>
+
+<div class="pdf-example__wrapper">
+    <h1>{% trans "Singlepage PDF document example" %}</h1>
+    <p class="page-example__text">
+        {% trans "This is a simple way of creating a PDF document with a single page." %}
+    </p>
+</div>

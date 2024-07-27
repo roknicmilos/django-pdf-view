@@ -10,10 +10,11 @@ from django_pdf.utils import override_language
 
 class PDF:
     page_class = PDFPage
+    default_template_name = 'django_pdf/pdf.html'
 
     def __init__(
         self,
-        template_name: str,
+        template_name: str = default_template_name,
         language: str = None,
         filename: str = None,
         title: str = None,

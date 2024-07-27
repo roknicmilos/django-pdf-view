@@ -1,7 +1,8 @@
 from .pdf_view import PDFView
-from .example_pdf_view import ExamplePDFView
+from .examples import MultipageExamplePDFView, SinglepageExamplePDFView
 
 __all__ = [
     'PDFView',
-    'ExamplePDFView',
+    'MultipageExamplePDFView',
+    'SinglepageExamplePDFView',
 ]

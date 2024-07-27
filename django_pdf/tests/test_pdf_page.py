@@ -27,7 +27,12 @@ class TestPDFPage(TestCase):
         self.assertEqual(pdf_page.context, {'foo': 'bar'})
 
     @patch('django_pdf.pdf_page.render_to_string')
-    def test_render_html(self, mock_render_pdf_to_string):
+    def test_render_html_with_wrapper_html(self, mock_render_pdf_to_string):
+        """
+        If with_wrapper_html is True (default), render_html should
+        return the rendered template wrapped in a div with the class
+        'pdf-page' and 'pdf-page--{page_number}'.
+        """
         mock_render_pdf_to_string.return_value = '<html>PDF Page</html>'
         pdf_page = PDFPage(
             template_name='pdf_page.html',
@@ -35,7 +40,28 @@ class TestPDFPage(TestCase):
             context={'foo': 'bar'}
         )
         html = pdf_page.render_html()
-        self.assertEqual(html, '<html>PDF Page</html>')
+        expected_html = (
+            '<div class="pdf-page pdf-page--1">'
+            '<html>PDF Page</html>'
+            '</div>'
+        )
+        self.assertEqual(html, expected_html)
+
+    @patch('django_pdf.pdf_page.render_to_string')
+    def test_render_html_without_wrapper_html(self, mock_render_pdf_to_string):
+        """
+        If with_wrapper_html is False, render_html should return the
+        rendered template without any wrapping.
+        """
+        mock_render_pdf_to_string.return_value = '<html>PDF Page</html>'
+        pdf_page = PDFPage(
+            template_name='pdf_page.html',
+            number=1,
+            context={'foo': 'bar'},
+            with_wrapper_html=False,
+        )
+        html = pdf_page.render_html()
+        self.assertEqual(html, mock_render_pdf_to_string.return_value)
 
     def test_get_context(self):
         pdf_page = PDFPage(

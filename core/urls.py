@@ -19,5 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pdf/', include('django_pdf.urls', namespace='pdf')),
+    path('', include('django_pdf.urls', namespace='pdf')),
 ]

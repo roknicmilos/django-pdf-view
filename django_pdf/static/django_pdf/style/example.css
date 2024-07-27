@@ -10,10 +10,10 @@
     background-color: #bdfda3;
 }
 
-.page-example__text {
-    font-size: 24px;
-}
-
 .pdf-example__wrapper {
     padding: 90px;
+}
+
+.page-example__text {
+    font-size: 24px;
 }
