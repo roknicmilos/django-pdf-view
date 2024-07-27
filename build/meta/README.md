@@ -184,11 +184,11 @@ pdf.add_page(
 )
 # Add second page:
 pdf.add_page(
-    template_name='my_app/pdf_page_1.html',
+    template_name='my_app/pdf_page_2.html',
     with_wrapper_html=False,
     context={
-        'title': 'Page 1 Title',
-        'text': 'Page 1 Text',
+        'title': 'Page 2 Title',
+        'text': 'Page 2 Text',
     }
 )
 
@@ -196,8 +196,8 @@ pdf.add_page(
 
 **_Breakdown_**:
 
-- We create a new `PDF` object with a `template_name` for the
-  document, a `title` (optional) for the document, a `language`
+- We create a new `PDF` object with a custom `template_name` (optional)
+  for the document, a `title` (optional) for the document, a `language`
   (optional) for the document, and a `filename` (optional) for the
   PDF file.
 - We add two pages to the PDF object by providing a `template_name`
