@@ -56,17 +56,18 @@ Django project, refer to [build/meta/README.md](build/meta/README.md).
    python manage.py runserver
    ```
 
-6. **Open Example PDF in the Browser**:
-    - PDF: [http://127.0.0.1:8000/pdf/example](http://127.0.0.1:8000/pdf/example)
-    - HTML: [http://127.0.0.1:8000/pdf/example?html=true](http://127.0.0.1:8000/pdf/example?html=true)
-    - Download PDF: [http://127.0.0.1:8000/pdf/example?download=true](http://127.0.0.1:8000/pdf/example?download=true)
+6. **Open PDF examples in the Browser**:
+    - Singlepage example: [http://127.0.0.1:8000/pdf/singlepage-example](http://127.0.0.1:8000/pdf/singlepage-example)
+    - Multipage example: [http://127.0.0.1:8000/pdf/multipage-example](http://127.0.0.1:8000/pdf/multipage-example)
+    - Append `?html=true` to the URL to view the HTML content.
+    - Append `?download=true` to the URL to download the PDF file.
 
 ## Running Tests
 
 To run the tests, use the following command:
 
 ```bash
-python manage.py test
+pytest
 ```
 
 ## Bugs/Requests

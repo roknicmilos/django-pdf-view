@@ -5,6 +5,7 @@ from django_pdf.services import create_pdf
 
 
 class TestCreatePdf(TestCase):
+
     def test_create_pdf_with_minimal_arguments(self):
         pdf = create_pdf(template_name='django_pdf/examples/singlepage.html')
 
