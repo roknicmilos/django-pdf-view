@@ -9,18 +9,13 @@ def create_pdf(
     language: str = None,
 ) -> PDF:
     """
-    Create a PDF object with a single page.
+    Creates a PDF object with a single page.
     """
-
     pdf = PDF(
         title=title,
         filename=filename,
         language=language
     )
-
-    if context is None:
-        context = {}
-
-    pdf.add_page(template_name=template_name, **context)
+    pdf.add_page(template_name=template_name, context=context)
 
     return pdf

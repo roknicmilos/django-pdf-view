@@ -26,7 +26,7 @@ class PDF:
         self._pages = []
         self._in_memory_pdf = None
 
-    def add_page(self, template_name: str, **context) -> None:
+    def add_page(self, template_name: str, context: dict = None) -> None:
         page_number = len(self._pages) + 1
         new_page = self.page_class(
             template_name=template_name,
