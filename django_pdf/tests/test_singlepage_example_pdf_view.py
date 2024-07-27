@@ -18,7 +18,7 @@ class TestSinglepageExamplePDFView(TestCase):
         self.assertEqual(len(pdf.pages), 1)
         self.assertEqual(
             pdf.pages[0].template_name,
-            f'django_pdf/examples/singlepage.html'
+            'django_pdf/examples/singlepage.html'
         )
 
     def test_get_pdf(self):
