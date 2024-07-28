@@ -4,13 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-pdf-view"
-version = "1.0.0"
+version = "1.0.1"
 description = "Django app for seamlessly displaying and downloading PDF documents in browser."
 readme = "README.md"
 requires-python = ">=3.6"
 keywords = ["pdf", "pdf view", "django pdf", "django pdf view", "generate pdf", "django generate pdf"]
 license = { text = "MIT" }
 authors = [
+    { name = "Miloš Roknić", email = "roknic.milos.994@gmail.com" }
+]
+maintainers = [
     { name = "Miloš Roknić", email = "roknic.milos.994@gmail.com" }
 ]
 classifiers = [
@@ -26,7 +29,6 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
     "Topic :: Software Development :: Libraries :: Application Frameworks",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
@@ -36,4 +38,5 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/roknicmilos/django-pdf-view"
+homepage = "https://github.com/roknicmilos/django-pdf-view"
+bug-tracker = "https://github.com/roknicmilos/django-pdf-view/issues"
