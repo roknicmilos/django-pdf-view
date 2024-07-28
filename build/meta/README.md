@@ -65,7 +65,7 @@ INSTALLED_APPS = [
 2. Run the development server:
 
    ```bash
-   python manage.py runserver
+   python3 manage.py runserver
    ```
    <br/>
 

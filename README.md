@@ -39,7 +39,7 @@ package in your Django project, refer to
 
 2. **Create and activate Virtual Environment**:
    ```bash
-   python -m venv venv
+   python3 -m venv venv
    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
    ```
 
@@ -50,12 +50,12 @@ package in your Django project, refer to
 
 4. **Run Migrations**:
    ```bash
-   python manage.py migrate
+   python3 manage.py migrate
    ```
 
 5. **Run the Development Server**:
    ```bash
-   python manage.py runserver
+   python3 manage.py runserver
    ```
 
 6. **Open PDF examples in the Browser**:

@@ -23,14 +23,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wkhtmltopdf
-          python -m venv venv
+          python3 -m venv venv
           source venv/bin/activate
           pip install -r requirements/dev.txt
 
       - name: Run migrations
         run: |
           source venv/bin/activate
-          python manage.py migrate
+          python3 manage.py migrate
 
       - name: Run linter
         run: |
