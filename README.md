@@ -1,16 +1,19 @@
 # Django PDF View
 
-**Django PDF View** is a Django project designed to generate
-PDF files.
-The project includes an application with classes, views, and
-templates for creating and displaying PDFs in the browser or
-downloading them based on URL parameters.
+**Django PDF View** is a Django app that streamlines the process
+of generating and displaying PDFs in the browser or downloading
+them based on URL parameters.
+Simply create an HTML template for your PDF document, then define
+a view that inherits from `PDFView` and implements the `create_pdf`
+method to return a PDF object with the desired content.
 
-## Standalone Usage
-
-If you want to install `django-pdf-view` as a standalone 
-package in your Django project, refer to 
-[build/meta/README.md](build/meta/README.md).
+**NOTE**: This is a full Django project that demonstrates the 
+usage of the **Django PDF View** package.
+It is also used for development and testing of the package.
+If you want to install Django PDF View as a standalone package in
+your Django project, refer to the official
+[Django PDF View documentation](https://pypi.org/project/django-pdf-view/)
+at PyPI.
 
 ## Getting Started
 

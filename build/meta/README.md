@@ -1,11 +1,11 @@
 # django-pdf-view
 
-**Django PDF View** is a Django app with classes, views, and
-templates for seamlessly generating and displaying PDFs in the
-browser or downloading them based on URL parameters.
-Simply create an HTML template for your PDF document, a view
-that inherits from `PDFView` and implements the `create_pdf`
-method that returns a `PDF` object with the desired content.
+**Django PDF View** is a Django app that streamlines the process
+of generating and displaying PDFs in the browser or downloading
+them based on URL parameters.
+Simply create an HTML template for your PDF document, then define
+a view that inherits from `PDFView` and implements the `create_pdf`
+method to return a PDF object with the desired content.
 
 ## Prerequisites
 
