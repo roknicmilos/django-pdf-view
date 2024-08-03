@@ -1,19 +1,37 @@
 # Django PDF View
 
-**Django PDF View** is a Django app that streamlines the process
-of generating and displaying PDFs in the browser or downloading
-them based on URL parameters.
-Simply create an HTML template for your PDF document, then define
-a view that inherits from `PDFView` and implements the `create_pdf`
-method to return a PDF object with the desired content.
-
-**NOTE**: This is a full Django project that demonstrates the 
-usage of the **Django PDF View** package.
+**NOTE**: This is a full Django project that demonstrates the
+usage of the [django-pdf-view](https://pypi.org/project/django-pdf-view/)
+package.
 It is also used for development and testing of the package.
 If you want to install Django PDF View as a standalone package in
 your Django project, refer to the official
-[Django PDF View documentation](https://pypi.org/project/django-pdf-view/)
-at PyPI.
+[documentation](https://pypi.org/project/django-pdf-view/).
+
+## Purpose
+
+The primary purpose of this package is to streamline the creation of
+PDF documents and displaying those PDFs in the browser or downloading
+them based on URL parameters. The package provides a **robust
+foundation of HTML and CSS for page layout**.
+Simply create an HTML template(s) for your PDF page(s), then define
+a view that inherits from `PDFView` and implements the `create_pdf`
+method that returns a PDF object with the desired content.
+This allows developers to focus on defining the content and custom
+styles of their PDF pages without worrying about the underlying layout
+complexities.
+
+### Key Features
+
+- **Predefined Page Layout**: The package includes built-in HTML
+  and CSS for structuring PDF pages.
+
+- **Flexible PDF Content and Styling**: Easily create your own HTML
+  templates for PDF pages and customize the look of your PDFs by
+  providing your own CSS.
+
+- **PDF View**: Easily switch between viewing the PDF, HTML content
+  and downloading the PDF file by appending URL parameters.
 
 ## Getting Started
 
