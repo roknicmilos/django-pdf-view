@@ -2,10 +2,10 @@ import os
 
 from django.test import TestCase
 
-from django_pdf_view.utils import temporary_env_var
+from django_pdf_view.context_managers import tmp_env_var
 
 
-class TestTemporaryEnvVar(TestCase):
+class TestTmpEnvVar(TestCase):
 
     def test_set_new_env_var(self):
         key = 'TEST_ENV_VAR'
@@ -14,7 +14,7 @@ class TestTemporaryEnvVar(TestCase):
         if key in os.environ:
             del os.environ[key]
 
-        with temporary_env_var(key, value):
+        with tmp_env_var(key, value):
             self.assertEqual(os.environ[key], value)
 
         self.assertNotIn(key, os.environ)
@@ -26,7 +26,7 @@ class TestTemporaryEnvVar(TestCase):
 
         os.environ[key] = original_value
 
-        with temporary_env_var(key, new_value):
+        with tmp_env_var(key, new_value):
             self.assertEqual(os.environ[key], new_value)
 
         self.assertEqual(os.environ[key], original_value)

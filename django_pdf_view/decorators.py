@@ -1,8 +1,8 @@
-import os
-from contextlib import contextmanager
 from functools import wraps
 from typing import Callable, Any
 from django.utils import translation
+
+from django_pdf_view.context_managers import tmp_env_var
 
 
 def override_language(method: Callable) -> Callable:
@@ -21,14 +21,19 @@ def override_language(method: Callable) -> Callable:
     return wrapper
 
 
-@contextmanager
-def temporary_env_var(key, value):
-    original_value = os.environ.get(key)
-    os.environ[key] = value
-    try:
-        yield
-    finally:
-        if original_value is not None:
-            os.environ[key] = original_value
-        else:
-            del os.environ[key]
+def with_tmp_env_var(key: str, value: str) -> Callable:
+    """
+    Decorator that sets a temporary environment variable
+    with the given key and value for the duration of the
+    decorated function.
+    """
+
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            with tmp_env_var(key, value):
+                return func(*args, **kwargs)
+
+        return wrapper
+
+    return decorator
