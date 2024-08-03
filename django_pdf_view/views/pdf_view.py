@@ -1,18 +1,15 @@
-import os
 from abc import abstractmethod
 
 from django.http import HttpResponse, FileResponse
 from django.views import View
 
+from django_pdf_view.decorators import with_tmp_env_var
 from django_pdf_view.pdf import PDF
 
 
 class PDFView(View):
 
-    def setup(self, request, *args, **kwargs):
-        super().setup(request, *args, **kwargs)
-        os.environ['QT_QPA_PLATFORM'] = 'offscreen'
-
+    @with_tmp_env_var('QT_QPA_PLATFORM', 'offscreen')
     def get(self, *args, **kwargs):
         pdf = self.create_pdf()
 

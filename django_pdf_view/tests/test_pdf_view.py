@@ -1,5 +1,3 @@
-import os
-
 from django.test import TestCase, RequestFactory
 
 from django_pdf_view.pdf import PDF
@@ -19,27 +17,6 @@ class ConcretePDFView(PDFView):
 
 
 class TestPDFView(TestCase):
-
-    def test_view_setup(self):
-        """
-        Test that the view `setup` method sets the QT_QPA_PLATFORM
-        environment variable to 'offscreen'.
-
-        Setting QT_QPA_PLATFORM environment variable to 'offscreen'
-        is necessary for wkhtmltopdf to work properly in some
-        environments because it ensures that the Qt framework operates
-        in offscreen mode.
-
-        wkhtmltopdf relies on Qt for rendering HTML to PDF.
-        Without a display server, rendering won't work unless Qt is
-        instructed to use an offscreen mode.
-        """
-        factory = RequestFactory()
-        request = factory.get('/')
-        view = ConcretePDFView()
-        os.environ['QT_QPA_PLATFORM'] = 'not_offscreen'
-        view.setup(request)
-        self.assertEqual(os.environ['QT_QPA_PLATFORM'], 'offscreen')
 
     def test_create_pdf(self):
         view = ConcretePDFView()

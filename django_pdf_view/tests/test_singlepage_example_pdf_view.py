@@ -6,7 +6,7 @@ from django_pdf_view.views import SinglepageExamplePDFView
 
 
 class TestSinglepageExamplePDFView(TestCase):
-    url_path = reverse_lazy('pdf:singlepage_example')
+    url_path = reverse_lazy('django_pdf_view:singlepage_example')
 
     def test_create_pdf(self):
         view = SinglepageExamplePDFView()

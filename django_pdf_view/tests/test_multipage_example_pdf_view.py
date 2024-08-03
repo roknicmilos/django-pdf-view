@@ -6,7 +6,7 @@ from django_pdf_view.views import MultipageExamplePDFView
 
 
 class TestMultipageExamplePDFView(TestCase):
-    url_path = reverse_lazy('pdf:multipage_example')
+    url_path = reverse_lazy('django_pdf_view:multipage_example')
 
     def test_create_pdf(self):
         view = MultipageExamplePDFView()
