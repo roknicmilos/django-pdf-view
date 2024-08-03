@@ -1,3 +1,5 @@
+import os
+from contextlib import contextmanager
 from functools import wraps
 from typing import Callable, Any
 from django.utils import translation
@@ -17,3 +19,16 @@ def override_language(method: Callable) -> Callable:
             return method(self, *args, **kwargs)
 
     return wrapper
+
+
+@contextmanager
+def temporary_env_var(key, value):
+    original_value = os.environ.get(key)
+    os.environ[key] = value
+    try:
+        yield
+    finally:
+        if original_value is not None:
+            os.environ[key] = original_value
+        else:
+            del os.environ[key]
