@@ -5,7 +5,7 @@ from django.utils import translation
 from pdfkit import from_string
 
 from django_pdf_view.pdf_page import PDFPage
-from django_pdf_view.utils import override_language
+from django_pdf_view.decorators import override_language
 
 
 class PDF:

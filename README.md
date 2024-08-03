@@ -62,8 +62,8 @@ at PyPI.
    ```
 
 6. **Open PDF examples in the Browser**:
-    - Singlepage example: [http://127.0.0.1:8000/pdf/singlepage-example](http://127.0.0.1:8000/pdf/singlepage-example)
-    - Multipage example: [http://127.0.0.1:8000/pdf/multipage-example](http://127.0.0.1:8000/pdf/multipage-example)
+    - Singlepage example: [http://127.0.0.1:8000/singlepage-example](http://127.0.0.1:8000/singlepage-example)
+    - Multipage example: [http://127.0.0.1:8000/multipage-example](http://127.0.0.1:8000/multipage-example)
     - Append `?html=true` to the URL to view the HTML content.
     - Append `?download=true` to the URL to download the PDF file.
 
