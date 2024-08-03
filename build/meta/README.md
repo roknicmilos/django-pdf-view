@@ -1,11 +1,29 @@
 # django-pdf-view
 
-**Django PDF View** is a Django app that streamlines the process
-of generating and displaying PDFs in the browser or downloading
-them based on URL parameters.
-Simply create an HTML template for your PDF document, then define
+## Purpose
+
+The primary purpose of this package is to streamline the creation of
+PDF documents and displaying those PDFs in the browser or downloading
+them based on URL parameters. The package provides a **robust
+foundation of HTML and CSS for page layout**.
+Simply create an HTML template(s) for your PDF page(s), then define
 a view that inherits from `PDFView` and implements the `create_pdf`
-method to return a PDF object with the desired content.
+method that returns a PDF object with the desired content.
+This allows developers to focus on defining the content and custom
+styles of their PDF pages without worrying about the underlying layout
+complexities.
+
+### Key Features
+
+- **Predefined Page Layout**: The package includes built-in HTML
+  and CSS for structuring PDF pages.
+
+- **Flexible PDF Content and Styling**: Easily create your own HTML
+  templates for PDF pages and customize the look of your PDFs by
+  providing your own CSS.
+
+- **PDF View**: Easily switch between viewing the PDF, HTML content
+  and downloading the PDF file by appending URL parameters.
 
 ## Prerequisites
 
@@ -144,18 +162,18 @@ your own template and view.
    
    urlpatterns = [
         ...
-        path('my_pdf/', MyPDFView.as_view(), name='my_pdf'),
+        path('my-pdf/', MyPDFView.as_view(), name='my_pdf'),
         ...
    ]
    ```
    <br/>
 
-4. Visit [http://localhost:8000/my_pdf/](http://localhost:8000/my_pdf/)
+4. Visit [http://localhost:8000/my-pdf/](http://localhost:8000/my-pdf/)
    in your browser.
     - To download the PDF, append `?download=true` to the URL:
-      [http://localhost:8000/my_pdf/?download=true](http://localhost:8000/my_pdf/?download=true)
+      [http://localhost:8000/my-pdf/?download=true](http://localhost:8000/my-pdf/?download=true)
     - To view the HTML version, append `?html=true` to the URL:
-      [http://localhost:8000/my_pdf/?html=true](http://localhost:8000/my_pdf/?html=true)
+      [http://localhost:8000/my-pdf/?html=true](http://localhost:8000/my-pdf/?html=true)
       <br/><br/>
 
 ## Advanced Usage
