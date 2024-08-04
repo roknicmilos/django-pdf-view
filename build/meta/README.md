@@ -5,7 +5,7 @@
 The primary purpose of this package is to streamline the creation of
 PDF documents and displaying those PDFs in the browser or downloading
 them based on URL parameters. The package provides a **robust
-foundation of HTML and CSS for page layout**.
+foundation of HTML and CSS for PDF page(s) layout**.
 Simply create an HTML template(s) for your PDF page(s), then define
 a view that inherits from `PDFView` and implements the `create_pdf`
 method that returns a PDF object with the desired content.
