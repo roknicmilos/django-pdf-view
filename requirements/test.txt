@@ -1,6 +1,0 @@
--r base.txt
-
-# Becase we run tests with multiple different Django
-# versions, we specify a range of Django versions in
-# this separate requirements file.
-Django>=3.2,<5
