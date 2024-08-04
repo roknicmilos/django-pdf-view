@@ -1,5 +1,11 @@
 # Django PDF View
 
+[![Build Status](https://github.com/roknicmilos/django-pdf-view/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/roknicmilos/django-pdf-view/actions/workflows/ci.yml/?query=branch:main)
+[![PyPI version](https://img.shields.io/pypi/v/django-pdf-view.svg)](https://pypi.org/project/django-pdf-view/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/roknicmilos/django-pdf-view.svg)](https://github.com/roknicmilos/django-pdf-view/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/roknicmilos/django-pdf-view.svg)](https://github.com/<username>/<repository>/issues)
+
 **NOTE**: This is a full Django project that demonstrates the
 usage of the [django-pdf-view](https://pypi.org/project/django-pdf-view/)
 package.
