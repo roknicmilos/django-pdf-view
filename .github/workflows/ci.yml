@@ -47,6 +47,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y wkhtmltopdf
+          pip install django==${{ matrix.django-version }}
           pip install -r requirements/base.txt
 
       - name: Run migrations
