@@ -56,5 +56,12 @@ jobs:
       - name: Run migrations
         run: python3 manage.py migrate
 
+      - name: Prepare environment variables
+        run: |
+          echo "PYTHON_VERSION=${{ matrix.python-version }}" >> $GITHUB_ENV
+          echo "DJANGO_VERSION=${{ matrix.django-version }}" >> $GITHUB_ENV
+          echo "PYTHON_ENV=$(echo ${{ matrix.python-version }} | tr -d '.')" >> $GITHUB_ENV
+          echo "DJANGO_ENV=$(echo ${{ matrix.django-version }} | tr -d '.')" >> $GITHUB_ENV
+
       - name: Run tests
-        run: tox -e py${{ matrix.python-version }}-django${{ matrix.django-version }}
+        run: tox -e py${PYTHON_ENV}-django${DJANGO_ENV}
