@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+import warnings
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -18,11 +19,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y&7%z3m73(wenq^7q6$4*yzm1==4at+b_e$#r=v2wae!$'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+if not DEBUG:
+    raise ValueError('Please change SECRET_KEY for production use')
+else:
+    warning.warn('Before publishing the app, disable DEBUG and change SECRET_KEY')
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-y&7%z3m73(wenq^7q6$4*yzm1==4at+b_e$#r=v2wae!$'
 
 ALLOWED_HOSTS = ['*']
 
