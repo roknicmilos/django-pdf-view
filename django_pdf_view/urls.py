@@ -15,4 +15,9 @@ urlpatterns = [
         views.MultipageExamplePDFView.as_view(),
         name='multipage_example'
     ),
+    path(
+        'cv/',
+        views.CVPDFView.as_view(),
+        name='cv'
+    ),
 ]
