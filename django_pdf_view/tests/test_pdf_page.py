@@ -31,7 +31,7 @@ class TestPDFPage(TestCase):
         """
         If with_wrapper_html is True (default), render_html should
         return the rendered template wrapped in a div with the class
-        'pdf-page' and 'pdf-page--{page_number}'.
+        'page' and 'page--{page_number}'.
         """
         mock_render_pdf_to_string.return_value = '<html>PDF Page</html>'
         pdf_page = PDFPage(
@@ -41,7 +41,7 @@ class TestPDFPage(TestCase):
         )
         html = pdf_page.render_html()
         expected_html = (
-            '<div class="pdf-page pdf-page--1">'
+            '<div class="page page--1">'
             '<html>PDF Page</html>'
             '</div>'
         )

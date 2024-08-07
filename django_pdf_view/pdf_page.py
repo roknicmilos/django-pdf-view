@@ -22,7 +22,7 @@ class PDFPage:
         )
         if self.with_wrapper_html:
             return (
-                f'<div class="pdf-page pdf-page--{self.number}">'
+                f'<div class="page page--{self.number}">'
                 f'{html}'
                 '</div>'
             )
