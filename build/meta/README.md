@@ -27,17 +27,16 @@ complexities.
 
 ## Prerequisites
 
-- [wkhtmltopdf](https://wkhtmltopdf.org/)
-    - Linux:
-        ```bash
-        sudo apt-get install wkhtmltopdf
-        ``` 
-    - macOS:
-        ```bash
-        brew install wkhtmltopdf
-        ```
-    - Windows: Download the installer from the
-      [wkhtmltopdf website](https://wkhtmltopdf.org/)
+- [wkhtmltopdf](https://wkhtmltopdf.org/) command line tools to
+  render HTML into PDF:
+    ```bash
+    sudo apt-get install wkhtmltopdf  # Linux
+    ```
+    ```bash
+    brew install wkhtmltopdf          # macOS
+    ```
+  For Windows, download the installer from the
+  [wkhtmltopdf website](https://wkhtmltopdf.org/).
 
 ## Installation
 
@@ -232,6 +231,26 @@ pdf.add_page(
     - `title`: Title of the PDF page.
     - `page_number`: Number of the PDF page.
     - `total_pages`: Total number of pages in the PDF document.
+
+### Template tags & filters
+
+There are some useful template tags and filters provided by the
+`django-pdf-view` package that can be used in your PDF templates:
+
+- `css` template filter
+    ```html
+   {% load css %}   
+       
+   <style>
+       {{ 'path/to/style.css'|css }}
+   </style>
+    ```
+- `svg` template tag
+    ```html
+   {% load svg %}
+   
+   {% svg 'path/to/image.svg' %}
+    ```
 
 ### Custom template for PDF document
 
