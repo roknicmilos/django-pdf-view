@@ -82,6 +82,16 @@ class PDF:
     @property
     def in_memory_pdf(self) -> BytesIO:
         if not self._in_memory_pdf:
-            html = from_string(self.render_html())
+            html = from_string(
+                input=self.render_html(),
+                options={
+                    'page-size': 'A4',
+                    'margin-top': '0mm',
+                    'margin-right': '0mm',
+                    'margin-bottom': '0mm',
+                    'margin-left': '0mm',
+                    'dpi': '300',
+                }
+            )
             self._in_memory_pdf = BytesIO(html)
         return self._in_memory_pdf

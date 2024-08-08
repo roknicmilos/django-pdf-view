@@ -1,12 +1,12 @@
-body {
+html, body {
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
-.pdf-page {
-    width: 1000px;
-    height: 1380px;
-    margin: 10px auto;
-    background: white;
-    break-after: page;
+.page {
+    width: 100%;
+    height: 100%;
 }
