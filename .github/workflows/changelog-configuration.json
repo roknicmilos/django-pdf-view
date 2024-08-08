@@ -44,6 +44,12 @@
       ]
     },
     {
+      "title": "## ⬆ Version Updates",
+      "labels": [
+        "version update"
+      ]
+    },
+    {
       "title": "## ❓ Uncategorized",
       "exclude_labels": [
         "feature",
