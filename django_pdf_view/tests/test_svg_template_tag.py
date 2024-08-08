@@ -6,7 +6,7 @@ from django_pdf_view.templatetags.svg import svg
 
 class TestSvgTemplateTag(TestCase):
 
-    @patch(target='apps.common.templatetags.svg.finders.find')
+    @patch(target='django_pdf_view.templatetags.svg.finders.find')
     def test_svg_file_found(self, mock_finders_find):
         mock_finders_find.return_value = '/path/to/static/file.svg'
         mocked_file_content = '<svg></svg>'
@@ -19,7 +19,7 @@ class TestSvgTemplateTag(TestCase):
             self.assertEqual(result, mocked_file_content)
 
     @patch(
-        target='apps.common.templatetags.svg.finders.find',
+        target='django_pdf_view.templatetags.svg.finders.find',
         return_value=None
     )
     def test_svg_file_not_found(self, _):
