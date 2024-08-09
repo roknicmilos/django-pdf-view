@@ -37,10 +37,13 @@ if [ "$1" ]; then
 fi
 
 # Initialize directory path variables:
-BUILD_SCRIPT_PATH=$(realpath "$0")
-BUILD_DIR=$(dirname "$BUILD_SCRIPT_PATH")
-ROOT_DIR=$(dirname "$BUILD_DIR")
-SRC_DIR="$BUILD_DIR/src"
+THIS_SCRIPT_PATH=$(realpath "$0")
+SCRIPTS_DIR=$(dirname "$THIS_SCRIPT_PATH")
+ROOT_DIR=$(dirname "$SCRIPTS_DIR")
+META_DIR="$ROOT_DIR/meta/"
+SRC_DIR="$ROOT_DIR/src/"
+DIST_DIR="$ROOT_DIR/dist/"
+APP_DIR="$ROOT_DIR/django_pdf_view/"
 
 ########################################################
 ############# Main script execution ####################
@@ -48,32 +51,32 @@ SRC_DIR="$BUILD_DIR/src"
 echo "Packaging django-pdf-view..."
 
 if [ -d "$SRC_DIR" ]; then
-    echo "Directory 'src' exists. Removing it..."
+    echo "Directory '$SRC_DIR' exists. Removing it..."
     rm -rf "$SRC_DIR"
 fi
 
-echo "Creating 'src' directory..."
+echo "Creating '$SRC_DIR' directory..."
 mkdir -p "$SRC_DIR"
 
-echo "Copying 'django_pdf_view' app to 'src'..."
-cp -r "$ROOT_DIR/django_pdf_view" "$SRC_DIR"
+echo "Copying '$APP_DIR' app to '$SRC_DIR'..."
+cp -r "$APP_DIR" "$SRC_DIR"
 
-echo "Copying meta files into 'src'..."
-cp "$BUILD_DIR/meta/"* "$SRC_DIR"
+echo "Copying meta files into '$SRC_DIR'..."
+cp "$META_DIR"* "$SRC_DIR"
 
 echo "Building distribution files..."
-python3 -m build "$SRC_DIR" || exit 1
+python3 -m build "$SRC_DIR" --outdir "$DIST_DIR" || exit 1
 
 echo "Checking distribution files..."
-twine check "$SRC_DIR/dist/"* || exit 1
+twine check "$DIST_DIR"* || exit 1
 
 # Push to PyPI based on flags
 if $PUSH_MAIN; then
     echo "Pushing to main PyPI..."
-    twine upload "$SRC_DIR/dist/"* || exit 1
+    twine upload "$DIST_DIR"* || exit 1
 elif $PUSH_TEST; then
     echo "Pushing to test PyPI..."
-    twine upload -r testpypi "$SRC_DIR/dist/"* || exit 1
+    twine upload -r testpypi "$DIST_DIR"* || exit 1
 else
     echo "No push option selected. Package built but not uploaded."
 fi
