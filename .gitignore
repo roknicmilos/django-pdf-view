@@ -25,15 +25,16 @@ atlassian-ide-plugin.xml
 *.py[cod]
 *$py.class
 
-# Folder that should contain generated
-# source files for builidng distribution
-# files:
+# Folders that are generated and removed during release process
+# (script execution) but we ignore them here anyway just in case
+# the release process fails and they are not removed:
 src/
+dist/
+tmp-venv/
 
 # Other distribution / packaging
 .Python build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
