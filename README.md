@@ -118,7 +118,7 @@ To create and publish a new package version, run the following commands:
 
 ```bash
 chmod +x -R ./scripts/
-./scripts/release
+./scripts/release <major|minor|patch>
 ```
 
 ## Contributing
