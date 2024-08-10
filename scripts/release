@@ -69,20 +69,23 @@ run_checks "$@"
 
 # Initialize variables
 VERSION_TYPE=$1
-CURRENT_VERSION=$(get_current_version)
-NEW_VERSION=$(increment_version "$CURRENT_VERSION" "$VERSION_TYPE")
 THIS_SCRIPT=$(realpath "$0")
 SCRIPTS_DIR=$(dirname "$THIS_SCRIPT")
 ROOT_DIR=$(dirname "$SCRIPTS_DIR")
 META_DIR="$ROOT_DIR/meta/"
 PYPROJECT_FILE="$META_DIR/pyproject.toml"
-BUILD_SCRIPT="$SCRIPTS_DIR/build.sh"
+BUILD_SCRIPT="$SCRIPTS_DIR/build"
+CURRENT_VERSION=$(get_current_version)
+NEW_VERSION=$(increment_version "$CURRENT_VERSION" "$VERSION_TYPE")
+
+echo "Current version: $CURRENT_VERSION"
+echo "New version: $NEW_VERSION"
 
 # Update the version in pyproject.yaml
 sed -i "s/^version = \".*\"/version = \"$NEW_VERSION\"/" "$PYPROJECT_FILE"
 
 # Commit the change
-git add pyproject.toml
+git add "$PYPROJECT_FILE"
 git commit -m "Update package version to $NEW_VERSION"
 
 # Create a git tag
