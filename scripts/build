@@ -66,6 +66,9 @@ cp -r "$APP_DIR" "$SRC_DIR"
 echo "Copying meta files into '$SRC_DIR'..."
 cp "$META_DIR"* "$SRC_DIR"
 
+echo "Installing build dependencies..."
+python3 -m pip install -U wheel twine setuptools
+
 echo "Building distribution files..."
 python3 -m build "$SRC_DIR" --outdir "$DIST_DIR" || exit 1
 
@@ -82,3 +85,11 @@ elif $PUSH_TEST; then
 else
   echo "No push option selected. Package built but not uploaded."
 fi
+
+echo "Removing '$SRC_DIR' directory..."
+rm -rf "$SRC_DIR"
+
+echo "Removing '$DIST_DIR' directory..."
+rm -rf "$DIST_DIR"
+
+echo "Finished packaging django-pdf-view."
