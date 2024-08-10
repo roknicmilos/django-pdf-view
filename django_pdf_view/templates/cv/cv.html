@@ -10,7 +10,7 @@
     <section class="left">
         <div class="left-content">
             <div class="avatar">
-                <img src="{{ base_url }}{% static 'cv/img/milos-roknic.png' %}"
+                <img src="{{ avatar_url }}"
                      alt="cv person"/>
             </div>
         </div>
@@ -19,22 +19,21 @@
         <div class="right-content">
             <div class="header">
                 <div class="title">
-                    <h1 class="name">MILOŠ ROKNIĆ</h1>
-                    <h3 class="role">SOFTWARE ENGINEER</h3>
+                    <h1 class="name">{{ first_name|upper }} {{ last_name|upper }}</h1>
+                    <h3 class="role">{{ role|upper }}</h3>
                 </div>
                 <div class="contact">
-                    <a class="contact-item"
-                       href="https://www.google.rs/maps/place/Kornelija+Stankovi%C4%87a+39,+Novi+Sad/@45.2600114,19.8085096,15.91z/data=!4m6!3m5!1s0x475b11b16298fc2d:0xa5444cbbc3bf8f26!8m2!3d45.2605492!4d19.8103612!16s%2Fg%2F11fx0qw3pz?hl=hr&entry=ttu">
+                    <a class="contact-item" href="{{ address.url }}">
                         {% svg "cv/svg/location.svg" %}
-                        <div class="contact-item-value">Kornelija Stankovića 39, Novi Sad, 21000, Serbia</div>
+                        <div class="contact-item-value">{{ address.label }}</div>
                     </a>
-                    <a class="contact-item" href="tel:+385638455742">
+                    <a class="contact-item" href="tel:{{ phone }}">
                         {% svg "cv/svg/phone.svg" %}
-                        <div class="contact-item-value">+385638455742</div>
+                        <div class="contact-item-value">{{ phone }}</div>
                     </a>
-                    <a class="contact-item" href="mailto:roknic.milos.994@gmail.com">
+                    <a class="contact-item" href="mailto:{{ email }}">
                         {% svg "cv/svg/email.svg" %}
-                        <div class="contact-item-value">roknic.milos.994@gmail.com</div>
+                        <div class="contact-item-value">{{ email }}</div>
                     </a>
                 </div>
             </div>
