@@ -12,11 +12,6 @@ media
 # IDE specific files:
 .idea
 
-# Folder that should contain generated
-# source files for builidng distribution
-# files:
-build/src
-
 # File-based project format
 *.iws
 
@@ -30,7 +25,12 @@ atlassian-ide-plugin.xml
 *.py[cod]
 *$py.class
 
-# Distribution / packaging
+# Folder that should contain generated
+# source files for builidng distribution
+# files:
+src/
+
+# Other distribution / packaging
 .Python build/
 develop-eggs/
 dist/

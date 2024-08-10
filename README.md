@@ -86,8 +86,10 @@ complexities.
    ```
 
 6. **Open PDF examples in the Browser**:
-    - Singlepage example: [http://127.0.0.1:8000/singlepage-example](http://127.0.0.1:8000/singlepage-example)
-    - Multipage example: [http://127.0.0.1:8000/multipage-example](http://127.0.0.1:8000/multipage-example)
+    - Singlepage
+      example: [http://127.0.0.1:8000/singlepage-example](http://127.0.0.1:8000/singlepage-example)
+    - Multipage
+      example: [http://127.0.0.1:8000/multipage-example](http://127.0.0.1:8000/multipage-example)
     - Append `?html=true` to the URL to view the HTML content.
     - Append `?download=true` to the URL to download the PDF file.
 
@@ -104,6 +106,32 @@ pytest
 If you encounter any bugs or have any requests, please use
 [GitHub issue tracker](https://github.com/roknicmilos/django-pdf-view/issues)
 to report them.
+
+# Release a new version
+
+When changes are made to the [django_pdf_view](./django_pdf_view) app that
+need to be reflected in the published package, or some package metadata was
+changed (in [meta/](./meta) directory), a **new package version should be built
+and uploaded to PyPI**.
+
+Follow these steps to build and upload a new package version:
+
+1. Install the necessary packages:
+   ```bash
+   python3 -m pip install -U wheel twine setuptools
+   ```
+
+2. Make sure you update the version number in `pyproject.toml`
+   (e.g. `version = "1.1.0"` => `version = "1.1.1"`)
+   <br/><br/>
+
+3. To package the app and create a new distribution, run:
+   ```bash
+    sh build.sh
+    ```
+   Optionally, you add `--push-test` or `--push-main` to
+   the command to automatically push the new version to the
+   test or main PyPI repository.
 
 ## Contributing
 
