@@ -66,14 +66,14 @@ INSTALLED_APPS = [
    
    urlpatterns = [
        path(
-           'singlepage-pdf/',
-           views.SinglepageExamplePDFView.as_view(),
-           name='singlepage_pdf'
+           'single-page-pdf/',
+           views.SinglePageExamplePDFView.as_view(),
+           name='single_page_pdf'
        ),
        path(
-           'multipage-pdf/',
-           views.MultipageExamplePDFView.as_view(),
-           name='multipage_pdf'
+           'multi-page-pdf/',
+           views.MultiPageExamplePDFView.as_view(),
+           name='multi_page_pdf'
        ),
    ]
    ```
@@ -87,8 +87,8 @@ INSTALLED_APPS = [
    <br/>
 
 3. Visit PDF examples in your browser:
-    - Singlepage PFD: [http://127.0.0.1:8000/singlepage-pdf](http://127.0.0.1:8000/singlepage-pdf)
-    - Multipage PFD: [http://127.0.0.1:8000/multipage-pdf](http://127.0.0.1:8000/multipage-pdf)
+    - Single Page PFD: [http://127.0.0.1:8000/single-page-pdf](http://127.0.0.1:8000/single-page-pdf)
+    - Multi Page PFD: [http://127.0.0.1:8000/multi-page-pdf](http://127.0.0.1:8000/multi-page-pdf)
     - Append `?html=true` to the URL to view the HTML content.
     - Append `?download=true` to the URL to download the PDF file.
 

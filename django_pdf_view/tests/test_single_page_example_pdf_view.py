@@ -2,25 +2,24 @@ from django.http import FileResponse
 from django.test import TestCase
 from django.urls import reverse_lazy
 
-from django_pdf_view.views import MultipageExamplePDFView
+from django_pdf_view.views import SinglePageExamplePDFView
 
 
-class TestMultipageExamplePDFView(TestCase):
-    url_path = reverse_lazy('django_pdf_view:multipage_example')
+class TestSinglePageExamplePDFView(TestCase):
+    url_path = reverse_lazy('django_pdf_view:single_page_example')
 
     def test_create_pdf(self):
-        view = MultipageExamplePDFView()
+        view = SinglePageExamplePDFView()
         pdf = view.create_pdf()
 
-        self.assertEqual(pdf.get_title(), 'Multipage Example PDF')
-        self.assertEqual(pdf.get_filename(), 'multipage_example_pdf.pdf')
+        self.assertEqual(pdf.get_title(), 'Single Page Example PDF')
+        self.assertEqual(pdf.get_filename(), 'single_page_example_pdf.pdf')
         self.assertEqual(pdf.template_name, 'django_pdf_view/pdf.html')
-        self.assertEqual(len(pdf.pages), 3)
-        for page in pdf.pages:
-            self.assertEqual(
-                page.template_name,
-                f'django_pdf_view/examples/multipage_{page.number}.html'
-            )
+        self.assertEqual(len(pdf.pages), 1)
+        self.assertEqual(
+            pdf.pages[0].template_name,
+            'django_pdf_view/examples/single_page.html'
+        )
 
     def test_get_pdf(self):
         response = self.client.get(self.url_path)
@@ -38,5 +37,5 @@ class TestMultipageExamplePDFView(TestCase):
         self.assertEqual(response['Content-Type'], 'application/pdf')
         self.assertEqual(
             response['Content-Disposition'],
-            'attachment; filename="multipage_example_pdf.pdf"'
+            'attachment; filename="single_page_example_pdf.pdf"'
         )

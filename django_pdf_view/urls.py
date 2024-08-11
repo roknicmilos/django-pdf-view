@@ -6,13 +6,13 @@ app_name = 'django-pdf-view'
 
 urlpatterns = [
     path(
-        'singlepage-example/',
-        views.SinglepageExamplePDFView.as_view(),
-        name='singlepage_example'
+        'single-page-example/',
+        views.SinglePageExamplePDFView.as_view(),
+        name='single_page_example'
     ),
     path(
-        'multipage-example/',
-        views.MultipageExamplePDFView.as_view(),
-        name='multipage_example'
+        'multi-page-example/',
+        views.MultiPageExamplePDFView.as_view(),
+        name='multi_page_example'
     ),
 ]
