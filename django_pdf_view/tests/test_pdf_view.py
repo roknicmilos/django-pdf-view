@@ -18,21 +18,46 @@ class ConcretePDFView(PDFView):
 
 class TestPDFView(TestCase):
 
+    @classmethod
+    def setUpTestData(cls):
+        cls.request_factory = RequestFactory()
+        cls.view = ConcretePDFView()
+
     def test_create_pdf(self):
-        view = ConcretePDFView()
-        pdf = view.create_pdf()
+        pdf = self.view.create_pdf()
         self.assertEqual(pdf, ConcretePDFView.sample_pdf)
 
     def test_html_response(self):
-        factory = RequestFactory()
-        request = factory.get('/?html=true')
+        response = self.view.html_response()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'text/html')
+
+    def test_pdf_response(self):
+        response = self.view.pdf_response()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/pdf')
+        self.assertEqual(
+            response['Content-Disposition'],
+            f'inline; filename="{ConcretePDFView.sample_pdf.filename}"'
+        )
+
+    def test_download_pdf_response(self):
+        response = self.view.download_pdf_response()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'application/pdf')
+        self.assertEqual(
+            response['Content-Disposition'],
+            f'attachment; filename="{ConcretePDFView.sample_pdf.filename}"'
+        )
+
+    def test_get_method_with_html_response(self):
+        request = self.request_factory.get('/?html=true')
         response = ConcretePDFView.as_view()(request)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'text/html')
 
-    def test_file_response(self):
-        factory = RequestFactory()
-        request = factory.get('/')
+    def test_get_method_with_pdf_response(self):
+        request = self.request_factory.get('/')
         response = ConcretePDFView.as_view()(request)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'application/pdf')
@@ -41,9 +66,8 @@ class TestPDFView(TestCase):
             f'inline; filename="{ConcretePDFView.sample_pdf.filename}"'
         )
 
-    def test_download_response(self):
-        factory = RequestFactory()
-        request = factory.get('/?download=true')
+    def test_get_method_with_download_pdf_response(self):
+        request = self.request_factory.get('/?download=true')
         response = ConcretePDFView.as_view()(request)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'application/pdf')
