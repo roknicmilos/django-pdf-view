@@ -1,4 +1,5 @@
 from abc import abstractmethod
+from typing import Literal
 
 from django.http import HttpResponse, FileResponse
 from django.views import View
@@ -8,17 +9,31 @@ from django_pdf_view.pdf import PDF
 
 
 class PDFView(View):
+    ResponseType = Literal['pdf', 'html', 'download']
+    response_type: ResponseType
 
-    @with_tmp_env_var('QT_QPA_PLATFORM', 'offscreen')
-    def get(self, *args, **kwargs):
+    @classmethod
+    def as_view(cls, response_type: ResponseType = 'pdf', **initkwargs):
+        cls.response_type = response_type
+        return super().as_view(**initkwargs)
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
         if self.request.GET.get('html') == 'true':
+            self.response_type = 'html'
+        elif self.request.GET.get('download') == 'true':
+            self.response_type = 'download'
+
+    def get(self, *args, **kwargs):
+        if self.response_type == 'html':
             return self.html_response()
 
-        if self.request.GET.get('download') == 'true':
+        if self.response_type == 'download':
             return self.download_pdf_response()
 
         return self.pdf_response()
 
+    @with_tmp_env_var('QT_QPA_PLATFORM', 'offscreen')
     def pdf_response(self) -> FileResponse:
         """
         This response will display the PDF in the
@@ -27,6 +42,7 @@ class PDFView(View):
         pdf = self.create_pdf()
         return FileResponse(pdf.in_memory_pdf, filename=pdf.filename)
 
+    @with_tmp_env_var('QT_QPA_PLATFORM', 'offscreen')
     def download_pdf_response(self) -> FileResponse:
         """
         This response will download the PDF without
