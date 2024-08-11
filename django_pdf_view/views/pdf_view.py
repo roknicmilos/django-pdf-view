@@ -10,12 +10,15 @@ from django_pdf_view.pdf import PDF
 
 class PDFView(View):
     ResponseType = Literal['pdf', 'html', 'download']
-    response_type: ResponseType
+    response_type: ResponseType = None
 
     @classmethod
     def as_view(cls, response_type: ResponseType = 'pdf', **initkwargs):
-        cls.response_type = response_type
-        return super().as_view(**initkwargs)
+        return super().as_view(response_type=response_type, **initkwargs)
+
+    def __init__(self, *args, response_type: ResponseType, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.response_type = response_type
 
     def setup(self, request, *args, **kwargs):
         super().setup(request, *args, **kwargs)
