@@ -8,7 +8,7 @@ class TestCreatePDF(TestCase):
 
     def test_create_pdf_with_minimal_arguments(self):
         pdf = create_pdf(
-            template_name='django_pdf_view/examples/singlepage.html'
+            template_name='django_pdf_view/examples/single_page.html'
         )
 
         self.assertEqual(pdf.template_name, 'django_pdf_view/pdf.html')
@@ -20,7 +20,7 @@ class TestCreatePDF(TestCase):
         page = pdf.pages[0]
         self.assertEqual(
             page.template_name,
-            'django_pdf_view/examples/singlepage.html'
+            'django_pdf_view/examples/single_page.html'
         )
         self.assertEqual(page.number, 1)
         self.assertEqual(page.get_context(), {'page_number': 1})
@@ -28,7 +28,7 @@ class TestCreatePDF(TestCase):
 
     def test_create_pdf_with_all_arguments(self):
         pdf = create_pdf(
-            template_name='django_pdf_view/examples/singlepage.html',
+            template_name='django_pdf_view/examples/single_page.html',
             title='My PDF',
             filename='my_pdf.pdf',
             context={'key': 'value'},
@@ -44,7 +44,7 @@ class TestCreatePDF(TestCase):
         page = pdf.pages[0]
         self.assertEqual(
             page.template_name,
-            'django_pdf_view/examples/singlepage.html'
+            'django_pdf_view/examples/single_page.html'
         )
         self.assertEqual(page.number, 1)
         self.assertEqual(page.get_context(), {

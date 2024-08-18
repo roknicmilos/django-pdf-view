@@ -86,10 +86,10 @@ complexities.
    ```
 
 6. **Open PDF examples in the Browser**:
-    - Singlepage
-      example: [http://127.0.0.1:8000/singlepage-example](http://127.0.0.1:8000/singlepage-example)
-    - Multipage
-      example: [http://127.0.0.1:8000/multipage-example](http://127.0.0.1:8000/multipage-example)
+    - Single Page
+      example: [http://127.0.0.1:8000/single-page-example](http://127.0.0.1:8000/single-page-example)
+    - Multi Page
+      example: [http://127.0.0.1:8000/multi-page-example](http://127.0.0.1:8000/multi-page-example)
     - Append `?html=true` to the URL to view the HTML content.
     - Append `?download=true` to the URL to download the PDF file.
 

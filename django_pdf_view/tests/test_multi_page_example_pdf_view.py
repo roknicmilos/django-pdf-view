@@ -1,42 +1,44 @@
 from django.http import FileResponse
 from django.test import TestCase
-from django.urls import reverse_lazy
+from django.urls import reverse
 
-from django_pdf_view.views import MultipageExamplePDFView
+from django_pdf_view.views import MultiPageExamplePDFView
 
 
-class TestMultipageExamplePDFView(TestCase):
-    url_path = reverse_lazy('django_pdf_view:multipage_example')
+class TestMultiPageExamplePDFView(TestCase):
 
     def test_create_pdf(self):
-        view = MultipageExamplePDFView()
+        view = MultiPageExamplePDFView()
         pdf = view.create_pdf()
 
-        self.assertEqual(pdf.get_title(), 'Multipage Example PDF')
-        self.assertEqual(pdf.get_filename(), 'multipage_example_pdf.pdf')
+        self.assertEqual(pdf.get_title(), 'Multi Page Example PDF')
+        self.assertEqual(pdf.get_filename(), 'multi_page_example_pdf.pdf')
         self.assertEqual(pdf.template_name, 'django_pdf_view/pdf.html')
         self.assertEqual(len(pdf.pages), 3)
         for page in pdf.pages:
             self.assertEqual(
                 page.template_name,
-                f'django_pdf_view/examples/multipage_{page.number}.html'
+                f'django_pdf_view/examples/multi_page_{page.number}.html'
             )
 
     def test_get_pdf(self):
-        response = self.client.get(self.url_path)
+        url_path = reverse('examples:multi_page:pdf')
+        response = self.client.get(path=url_path)
         self.assertEqual(response.status_code, 200)
         self.assertIsInstance(response, FileResponse)
 
     def test_get_html(self):
-        response = self.client.get(f'{self.url_path}?html=true')
+        url_path = reverse('examples:multi_page:html')
+        response = self.client.get(path=url_path)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'text/html')
 
     def test_download_pdf(self):
-        response = self.client.get(f'{self.url_path}?download=true')
+        url_path = reverse('examples:multi_page:download')
+        response = self.client.get(path=url_path)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'application/pdf')
         self.assertEqual(
             response['Content-Disposition'],
-            'attachment; filename="multipage_example_pdf.pdf"'
+            'attachment; filename="multi_page_example_pdf.pdf"'
         )
