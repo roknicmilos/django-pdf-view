@@ -2,19 +2,13 @@ from unittest import TestCase
 from unittest.mock import patch
 from io import BytesIO
 
+from django.template.loader import render_to_string
+
 from django_pdf_view.pdf import PDF
-from django_pdf_view.pdf_page import PDFPage
+from django_pdf_view.utils import render_css
 
 
 class TestPDF(TestCase):
-
-    def setUp(self):
-        super().setUp()
-        self.render_page_html_patcher = patch(
-            target='django_pdf_view.pdf_page.PDFPage.render_html',
-            return_value='<div>PDF Page</div>'
-        )
-        self.mock_render_page_html = self.render_page_html_patcher.start()
 
     def test_initialization(self):
         pdf = PDF(
@@ -27,39 +21,25 @@ class TestPDF(TestCase):
         self.assertEqual(pdf.language, 'en')
         self.assertEqual(pdf.filename, 'test.pdf')
         self.assertEqual(pdf._title, 'Test PDF')
-        self.assertEqual(pdf.pages, [])
 
-    def test_add_page(self):
-        pdf = PDF(template_name='pdf.html')
-        pdf.add_page(template_name='pdf_page.html')
-        self.assertEqual(len(pdf.pages), 1)
-        self.assertIsInstance(pdf.pages[0], PDFPage)
-        self.assertEqual(pdf.pages[0].template_name, 'pdf_page.html')
-
-    @patch('django_pdf_view.pdf.render_to_string')
-    def test_render_html(self, mock_render_pdf_to_string):
-        mock_render_pdf_to_string.return_value = '<html>PDF</html>'
+    @patch('django_pdf_view.pdf.PDF.get_context')
+    def test_render_html(self, mock_get_context):
         pdf = PDF(
             template_name='pdf.html',
             title='Awesome PDF'
         )
-        pdf.add_page(template_name='pdf_page.html')
-        html = pdf.render_html()
-        mock_render_pdf_to_string.assert_called_once_with(
-            template_name='pdf.html',
-            context={
-                'pages_html': '<div>PDF Page</div>',
-                'title': 'Awesome PDF'
-            }
+        mock_get_context.return_value = {}
+        actual_html = pdf.render_html()
+        expected_html = render_to_string(
+            template_name=PDF.base_template_name,
+            context=mock_get_context.return_value
         )
-        self.mock_render_page_html.assert_called_once()
-        self.assertEqual(html, '<html>PDF</html>')
+        self.assertEqual(actual_html, expected_html)
 
     @patch('django_pdf_view.pdf.from_string')
     def test_in_memory_pdf(self, mock_from_string):
         mock_from_string.return_value = b'PDF content'
         pdf = PDF(template_name='django_pdf_view/pdf.html')
-        pdf.add_page(template_name='django_pdf_view/pdf_page.html')
         in_memory_pdf = pdf.in_memory_pdf
         self.assertIsInstance(in_memory_pdf, BytesIO)
         self.assertEqual(in_memory_pdf.getvalue(), b'PDF content')
@@ -90,15 +70,20 @@ class TestPDF(TestCase):
         pdf_without_title = PDF(template_name='document.html')
         self.assertEqual(pdf_without_title.get_title(), 'document')
 
-    def test_get_context(self):
-        pdf = PDF(template_name='pdf.html')
-        pdf.add_page(template_name='pdf_page.html')
+    @patch('django_pdf_view.pdf.render_to_string')
+    def test_get_context(self, mock_render_to_string):
+        mock_render_to_string.return_value = 'content'
+        extra_context = {
+            'extra': 'context'
+        }
+        pdf = PDF(
+            template_name='pdf.html',
+            context=extra_context
+        )
         context = pdf.get_context()
         self.assertEqual(context, {
-            'pages_html': '<div>PDF Page</div>',
-            'title': 'pdf'
+            'content': mock_render_to_string.return_value,
+            'title': 'pdf',
+            'css': render_css(PDF.base_css_path),
+            **extra_context,
         })
-
-    def tearDown(self):
-        super().tearDown()
-        self.render_page_html_patcher.stop()

@@ -1,16 +1,16 @@
 from unittest.mock import patch, mock_open as open_mock
 from django.test import SimpleTestCase
 
-from django_pdf_view.templatetags.css import css
+from django_pdf_view.utils import render_css
 
 
-class TestCssTemplateFilter(SimpleTestCase):
+class TestRenderCss(SimpleTestCase):
 
     def setUp(self):
         super().setUp()
 
         self.finders_find_patcher = patch(
-            target='django_pdf_view.templatetags.css.finders.find'
+            target='django_pdf_view.utils.finders.find'
         )
         self.mock_finders_find = self.finders_find_patcher.start()
 
@@ -21,7 +21,7 @@ class TestCssTemplateFilter(SimpleTestCase):
             target='builtins.open',
             new=open_mock(read_data=mocked_file_content)
         ) as mock_file:
-            result = css('file.css')
+            result = render_css('file.css')
             mock_file.assert_called_once_with('/path/to/static/file.css', 'r')
             self.assertEqual(result, mocked_file_content)
 
@@ -45,7 +45,7 @@ class TestCssTemplateFilter(SimpleTestCase):
             'body { color: black; }\n'
         )
 
-        result = css('/fake_dir')
+        result = render_css('/fake_dir')
 
         self.assertEqual(result, expected_content)
 
@@ -58,11 +58,11 @@ class TestCssTemplateFilter(SimpleTestCase):
     def test_css_file_not_found(self):
         self.mock_finders_find.return_value = None
         with self.assertRaises(FileNotFoundError):
-            css('nonexistent.css')
+            render_css('nonexistent.css')
 
     def test_css_invalid_extension(self):
         with self.assertRaises(ValueError):
-            css('file.txt')
+            render_css('file.txt')
 
     def tearDown(self):
         super().tearDown()

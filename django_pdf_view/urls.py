@@ -36,7 +36,7 @@ urlpatterns = [
         ),
     ),
     path(
-        'multi-page',
+        'multi-page/',
         include(
             (multi_page_urlpatterns, 'django_pdf_view'),
             namespace='multi_page'

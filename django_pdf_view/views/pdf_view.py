@@ -1,4 +1,3 @@
-from abc import abstractmethod
 from typing import Literal
 
 from django.http import HttpResponse, FileResponse
@@ -11,6 +10,10 @@ from django_pdf_view.pdf import PDF
 class PDFView(View):
     ResponseType = Literal['pdf', 'html', 'download']
     response_type: ResponseType | None = None
+    title: str = None
+    filename: str = None
+    css_paths: list[str] = []
+    template_name: str
 
     @classmethod
     def as_view(cls, response_type: ResponseType = None, **initkwargs):
@@ -72,6 +75,16 @@ class PDFView(View):
             content_type='text/html',
         )
 
-    @abstractmethod
     def create_pdf(self) -> PDF:
-        pass  # pragma: no cover
+        return PDF(
+            template_name=self.template_name,
+            title=self.title,
+            filename=self.filename,
+            context=self.get_context(),
+            css_paths=self.css_paths.copy(),
+        )
+
+    def get_context(self) -> dict:
+        return {
+            'response_type': self.response_type,
+        }

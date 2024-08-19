@@ -1,0 +1,12 @@
+.page h1 {
+    padding: 90px;
+    margin: 0;
+}
+
+.page--green {
+    background-color: lightgreen;
+}
+
+.page--red {
+    background-color: lightcoral;
+}
