@@ -73,11 +73,14 @@ their PDF pages without having to deal with complex layout issues.
 
 6. **Open PDF examples in the Browser**:
     - Single Page
-      example: [http://127.0.0.1:8000/single-page-example](http://127.0.0.1:8000/single-page-example)
-    - Multi Page
-      example: [http://127.0.0.1:8000/multi-page-example](http://127.0.0.1:8000/multi-page-example)
-    - Append `?html=true` to the URL to view the HTML content.
-    - Append `?download=true` to the URL to download the PDF file.
+      examples:
+        - [http://127.0.0.1:8000/examples/single-page/pdf](http://127.0.0.1:8000/examples/single-page/pdf/)
+        - [http://127.0.0.1:8000/examples/single-page/html](http://127.0.0.1:8000/examples/single-page/html/)
+        - [http://127.0.0.1:8000/examples/single-page/download](http://127.0.0.1:8000/examples/single-page/download/)
+    - Multi Page examples:
+        - [http://127.0.0.1:8000/examples/multi-page/pdf](http://127.0.0.1:8000/examples/multi-page/pdf/)
+        - [http://127.0.0.1:8000/examples/multi-page/html](http://127.0.0.1:8000/examples/multi-page/html/)
+        - [http://127.0.0.1:8000/examples/multi-page/download](http://127.0.0.1:8000/examples/multi-page/download/)
 
 ## Running Tests
 
