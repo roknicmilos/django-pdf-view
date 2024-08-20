@@ -4,47 +4,31 @@ from django.template.loader import render_to_string
 from django.utils import translation
 from pdfkit import from_string
 
-from django_pdf_view.pdf_page import PDFPage
 from django_pdf_view.decorators import override_language
+from django_pdf_view.utils import render_css
 
 
 class PDF:
-    page_class = PDFPage
-    default_template_name = 'django_pdf_view/pdf.html'
+    base_template_name = 'django_pdf_view/pdf.html'
+    base_css_path = 'django_pdf_view/css/pdf.css'
 
     def __init__(
         self,
-        template_name: str = default_template_name,
+        template_name: str,
         language: str = None,
         filename: str = None,
         title: str = None,
+        context: dict = None,
+        css_paths: list = None,  # file or directory paths
     ):
         self.template_name = template_name
         self.language = language or translation.get_language()
         self._filename = filename
         self._title = title
-        self._pages = []
+        self._context = context or {}
+        self._css_paths = css_paths or []
+        self._css_paths.insert(0, self.base_css_path)
         self._in_memory_pdf = None
-
-    def add_page(
-        self,
-        template_name: str,
-        context: dict = None,
-        with_wrapper_html: bool = True,
-    ) -> None:
-        page_number = len(self._pages) + 1
-        new_page = self.page_class(
-            template_name=template_name,
-            number=page_number,
-            context=context,
-            with_wrapper_html=with_wrapper_html,
-        )
-        self._pages.append(new_page)
-
-    @property
-    def pages(self) -> list[PDFPage]:
-        self._pages.sort(key=lambda page: page.number)
-        return self._pages
 
     @property
     def filename(self) -> str:
@@ -54,23 +38,31 @@ class PDF:
     def get_filename(self) -> str:
         if self._filename:
             return self._filename
+
+        # Use the template name as default filename:
         return self.template_name.split('/')[-1].replace('.html', '.pdf')
 
     @override_language
     def render_html(self) -> str:
         return render_to_string(
-            template_name=self.template_name,
+            template_name=self.base_template_name,
             context=self.get_context()
         )
 
     def get_context(self) -> dict:
-        total_pages = len(self._pages)
-        pages_html = ''.join([
-            page.render_html(total_pages=total_pages) for page in self.pages
-        ])
-        return {
-            'pages_html': pages_html,
+        css = '\n'.join(render_css(css_path) for css_path in self._css_paths)
+        context = {
             'title': self.get_title(),
+            'css': css,
+            **self._context,
+        }
+        content = render_to_string(
+            template_name=self.template_name,
+            context=context,
+        )
+        return {
+            'content': content,
+            **context
         }
 
     def get_title(self) -> str:

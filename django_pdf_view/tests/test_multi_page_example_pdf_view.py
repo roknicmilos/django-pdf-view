@@ -2,7 +2,8 @@ from django.http import FileResponse
 from django.test import TestCase
 from django.urls import reverse
 
-from django_pdf_view.views import MultiPageExamplePDFView
+from django_pdf_view.pdf import PDF
+from django_pdf_view.views.examples import MultiPageExamplePDFView
 
 
 class TestMultiPageExamplePDFView(TestCase):
@@ -11,15 +12,19 @@ class TestMultiPageExamplePDFView(TestCase):
         view = MultiPageExamplePDFView()
         pdf = view.create_pdf()
 
-        self.assertEqual(pdf.get_title(), 'Multi Page Example PDF')
-        self.assertEqual(pdf.get_filename(), 'multi_page_example_pdf.pdf')
-        self.assertEqual(pdf.template_name, 'django_pdf_view/pdf.html')
-        self.assertEqual(len(pdf.pages), 3)
-        for page in pdf.pages:
-            self.assertEqual(
-                page.template_name,
-                f'django_pdf_view/examples/multi_page_{page.number}.html'
-            )
+        self.assertEqual(pdf.get_title(), MultiPageExamplePDFView.title)
+        self.assertEqual(pdf.get_filename(), MultiPageExamplePDFView.filename)
+        self.assertEqual(
+            pdf.template_name,
+            MultiPageExamplePDFView.template_name
+        )
+        self.assertEqual(
+            pdf._css_paths,
+            [
+                PDF.base_css_path,
+                *MultiPageExamplePDFView.css_paths,
+            ]
+        )
 
     def test_get_pdf(self):
         url_path = reverse('examples:multi_page:pdf')
@@ -40,5 +45,5 @@ class TestMultiPageExamplePDFView(TestCase):
         self.assertEqual(response['Content-Type'], 'application/pdf')
         self.assertEqual(
             response['Content-Disposition'],
-            'attachment; filename="multi_page_example_pdf.pdf"'
+            f'attachment; filename="{MultiPageExamplePDFView.filename}"'
         )

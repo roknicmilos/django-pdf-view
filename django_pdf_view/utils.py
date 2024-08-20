@@ -1,12 +1,8 @@
 import os
 from django.contrib.staticfiles import finders
-from django import template
-
-register = template.Library()
 
 
-@register.filter
-def css(path: str) -> str:
+def render_css(path: str) -> str:
     """
     Returns the content of a CSS file or all CSS files in a directory.
     """

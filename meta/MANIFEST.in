@@ -4,3 +4,11 @@ include pyproject.toml
 
 recursive-include django_pdf_view/static *
 recursive-include django_pdf_view/templates *
+
+exclude django_pdf_view/templates/django_pdf_view/examples/*
+exclude django_pdf_view/static/django_pdf_view/css/examples/*
+exclude django_pdf_view/tests/*
+exclude django_pdf_view/urls.py
+exclude django_pdf_view/views/examples.py
+exclude django_pdf_view/tests/test_multi_page_example_pdf_view.py
+exclude django_pdf_view/tests/test_single_page_example_pdf_view.py

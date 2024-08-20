@@ -1,4 +1,4 @@
-{% load i18n css %}
+{% load i18n %}
 
 {% get_current_language as CURRENT_LANGUAGE_CODE %}
 
@@ -6,14 +6,10 @@
 <html lang="{{ CURRENT_LANGUAGE_CODE }}">
 <head>
     <meta charset="utf-8">
-    <title>{% block title %}{{ title }}{% endblock title %}</title>
-    <style>
-        {% block style %}
-            {{ 'django_pdf_view/style/pdf.css'|css }}
-        {% endblock style %}
-    </style>
+    <title>{{ title }}</title>
+    <style>{{ css }}</style>
 </head>
 <body>
-{{ pages_html|safe }}
+{{ content }}
 </body>
 </html>

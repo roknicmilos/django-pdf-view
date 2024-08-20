@@ -1,19 +1,12 @@
 from django.test import TestCase, RequestFactory
 
-from django_pdf_view.pdf import PDF
 from django_pdf_view.views import PDFView
 
 
 class ConcretePDFView(PDFView):
-    sample_pdf = PDF(
-        template_name='django_pdf_view/pdf.html',
-        language='en',
-        filename='test.pdf',
-        title='Test PDF'
-    )
-
-    def create_pdf(self):
-        return self.sample_pdf
+    template_name = 'django_pdf_view/pdf.html'
+    filename = 'test.pdf'
+    title = 'Test PDF'
 
 
 class TestPDFView(TestCase):
@@ -25,7 +18,9 @@ class TestPDFView(TestCase):
     def test_create_pdf(self):
         view = ConcretePDFView()
         pdf = view.create_pdf()
-        self.assertEqual(pdf, ConcretePDFView.sample_pdf)
+        self.assertEqual(pdf.template_name, ConcretePDFView.template_name)
+        self.assertEqual(pdf.get_filename(), ConcretePDFView.filename)
+        self.assertEqual(pdf.get_title(), ConcretePDFView.title)
 
     def test_html_response(self):
         view = ConcretePDFView()
@@ -40,7 +35,7 @@ class TestPDFView(TestCase):
         self.assertEqual(response['Content-Type'], 'application/pdf')
         self.assertEqual(
             response['Content-Disposition'],
-            f'inline; filename="{ConcretePDFView.sample_pdf.filename}"'
+            f'inline; filename="{ConcretePDFView.filename}"'
         )
 
     def test_download_pdf_response(self):
@@ -50,7 +45,7 @@ class TestPDFView(TestCase):
         self.assertEqual(response['Content-Type'], 'application/pdf')
         self.assertEqual(
             response['Content-Disposition'],
-            f'attachment; filename="{ConcretePDFView.sample_pdf.filename}"'
+            f'attachment; filename="{ConcretePDFView.filename}"'
         )
 
     def test_get_method_with_html_response(self):
@@ -78,7 +73,7 @@ class TestPDFView(TestCase):
         self.assertEqual(response['Content-Type'], 'application/pdf')
         self.assertEqual(
             response['Content-Disposition'],
-            f'inline; filename="{ConcretePDFView.sample_pdf.filename}"'
+            f'inline; filename="{ConcretePDFView.filename}"'
         )
 
         # When response type is provided through view initialization,
@@ -89,7 +84,7 @@ class TestPDFView(TestCase):
         self.assertEqual(response['Content-Type'], 'application/pdf')
         self.assertEqual(
             response['Content-Disposition'],
-            f'inline; filename="{ConcretePDFView.sample_pdf.filename}"'
+            f'inline; filename="{ConcretePDFView.filename}"'
         )
 
     def test_get_method_with_download_pdf_response(self):
@@ -101,7 +96,7 @@ class TestPDFView(TestCase):
         self.assertEqual(response['Content-Type'], 'application/pdf')
         self.assertEqual(
             response['Content-Disposition'],
-            f'attachment; filename="{ConcretePDFView.sample_pdf.filename}"'
+            f'attachment; filename="{ConcretePDFView.filename}"'
         )
 
         # When response type is provided through view initialization,
@@ -112,5 +107,5 @@ class TestPDFView(TestCase):
         self.assertEqual(response['Content-Type'], 'application/pdf')
         self.assertEqual(
             response['Content-Disposition'],
-            f'attachment; filename="{ConcretePDFView.sample_pdf.filename}"'
+            f'attachment; filename="{ConcretePDFView.filename}"'
         )

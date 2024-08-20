@@ -1,23 +1,40 @@
+from unittest.mock import patch
+
 from django.http import FileResponse
 from django.test import TestCase
 from django.urls import reverse
 
-from django_pdf_view.views import SinglePageExamplePDFView
+from django_pdf_view.pdf import PDF
+from django_pdf_view.views.examples import SinglePageExamplePDFView
 
 
 class TestSinglePageExamplePDFView(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        super().setUpTestData()
+        cls.render_css_patcher = patch(
+            target='django_pdf_view.pdf.render_css',
+            return_value=''
+        )
+        cls.render_css_patcher.start()
 
     def test_create_pdf(self):
         view = SinglePageExamplePDFView()
         pdf = view.create_pdf()
 
-        self.assertEqual(pdf.get_title(), 'Single Page Example PDF')
-        self.assertEqual(pdf.get_filename(), 'single_page_example_pdf.pdf')
-        self.assertEqual(pdf.template_name, 'django_pdf_view/pdf.html')
-        self.assertEqual(len(pdf.pages), 1)
+        self.assertEqual(pdf.get_title(), SinglePageExamplePDFView.title)
+        self.assertEqual(pdf.get_filename(), SinglePageExamplePDFView.filename)
         self.assertEqual(
-            pdf.pages[0].template_name,
-            'django_pdf_view/examples/single_page.html'
+            pdf.template_name,
+            SinglePageExamplePDFView.template_name
+        )
+        self.assertEqual(
+            pdf._css_paths,
+            [
+                PDF.base_css_path,
+                *SinglePageExamplePDFView.css_paths,
+            ]
         )
 
     def test_get_pdf(self):
@@ -39,5 +56,10 @@ class TestSinglePageExamplePDFView(TestCase):
         self.assertEqual(response['Content-Type'], 'application/pdf')
         self.assertEqual(
             response['Content-Disposition'],
-            'attachment; filename="single_page_example_pdf.pdf"'
+            f'attachment; filename="{SinglePageExamplePDFView.filename}"'
         )
+
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        cls.render_css_patcher.stop()
