@@ -2,41 +2,30 @@
 
 ## Purpose
 
-The primary purpose of this package is to streamline the creation of
-PDF documents and displaying those PDFs in the browser or downloading
-them based on URL parameters. The package provides a **robust
-foundation of HTML and CSS for PDF page(s) layout**.
-Simply create an HTML template(s) for your PDF page(s), then define
-a view that inherits from `PDFView` and implements the `create_pdf`
-method that returns a PDF object with the desired content.
-This allows developers to focus on defining the content and custom
-styles of their PDF pages without worrying about the underlying layout
-complexities.
+The primary purpose of this Django package is to streamline the creation of PDF
+documents and allow for easy viewing or downloading in the browser. The package
+provides a **solid foundation of HTML and CSS for PDF file layout**. To use it,
+simply create an HTML template for your PDF document, then create a view that
+inherits from `PDFView` and define the necessary class attributes to generate
+the PDF.
+
+This approach enables developers to focus on crafting the content and styles of
+their PDF pages without having to deal with complex layout issues.
 
 ### Key Features
 
-- **Predefined Page Layout**: The package includes built-in HTML
-  and CSS for structuring PDF pages.
+- **Predefined Page Layout**: Includes built-in base HTML and CSS to help
+  structure your PDF pages efficiently.
 
-- **Flexible PDF Content and Styling**: Easily create your own HTML
-  templates for PDF pages and customize the look of your PDFs by
-  providing your own CSS.
+- **Flexible PDF Content and Styling**: Easily create your own HTML template for
+  the PDF document and customize the appearance by applying your own CSS.
 
-- **PDF View**: Easily switch between viewing the PDF, HTML content
-  and downloading the PDF file by appending URL parameters.
+- **PDF View Response Options**: Seamlessly switch between viewing the PDF,
+  displaying the HTML content, and downloading the PDF file.
 
 ## Prerequisites
 
-- [wkhtmltopdf](https://wkhtmltopdf.org/) command line tools to
-  render HTML into PDF:
-    ```bash
-    sudo apt-get install wkhtmltopdf  # Linux
-    ```
-    ```bash
-    brew install wkhtmltopdf          # macOS
-    ```
-  For Windows, download the installer from the
-  [wkhtmltopdf website](https://wkhtmltopdf.org/).
+- [wkhtmltopdf](https://wkhtmltopdf.org/)
 
 ## Installation
 
@@ -56,171 +45,66 @@ INSTALLED_APPS = [
 ]
 ```
 
-## Try it out
-
-1. Add the following URL pattern to your project's `urls.py`:
-
-   ```python
-   from django.urls import path
-   from django_pdf_view import views
-   
-   urlpatterns = [
-       path(
-           'single-page-pdf/',
-           views.SinglePageExamplePDFView.as_view(),
-           name='single_page_pdf'
-       ),
-       path(
-           'multi-page-pdf/',
-           views.MultiPageExamplePDFView.as_view(),
-           name='multi_page_pdf'
-       ),
-   ]
-   ```
-    <br/>
-
-2. Run the development server:
-
-   ```bash
-   python3 manage.py runserver
-   ```
-   <br/>
-
-3. Visit PDF examples in your browser:
-    - Single Page PFD: [http://127.0.0.1:8000/single-page-pdf](http://127.0.0.1:8000/single-page-pdf)
-    - Multi Page PFD: [http://127.0.0.1:8000/multi-page-pdf](http://127.0.0.1:8000/multi-page-pdf)
-    - Append `?html=true` to the URL to view the HTML content.
-    - Append `?download=true` to the URL to download the PDF file.
-
 ## Usage
 
-In order to create your own PDFs, you need to implement
-your own template and view.
+In order to create your own PDF, you need to implement your own view and
+template.
 
-1. Create a new template to define the content of your PDF page:
+1. Create a new view to render the PDF:
+
+    ```python
+   # my_app/views.py    
+        
+   from django_pdf_view.views.pdf_view import PDFView
+        
+        
+   class MyPDFView(PDFView):
+        template_name = 'my_app/my_pdf.html'
+        title = 'My PDF Document' # optional
+        filename = 'My PDF.pdf' # optional
+        css_paths = [ # optional
+            'my_pdf/css/my_pdf.css',
+        ]
+    ```
+
+2. Create a new template to define the content of your PDF page:
 
    ```html
    <!-- my_app/templates/my_app/pdf_page.html -->
-   {% load css %}   
    
-   <style>
-       {{ 'my_app/style/pdf_page.css'|css }}
-   </style>
+   <div class="page">
+        <h1 class="my-title">{{ title }}</h1>
+        <p class="my-text">{{ text }}</p>
+        <p class="my-text">Additional PDF page text.</p>
+   </div>
    
-   <h1 class="my-title">{{ title }}</h1>
-   <p class="my-text">{{ text }}</p>
-   <p class="my-text">Additional PDF page text.</p>
+   <!-- Define more <div class="page"> elements for additional pages -->
    ```
-   **_Breakdown_**:
-    - We render the content of a custom CSS file
-      (`my_app/style/pdf_page.css`) in the `<style>` tag.
-    - We define the content of our PDF page using HTML tags.
-      Some of this content is passed as context to the template
-      (variables `title` and `text`).
-    - We use the `my-title` and `my-text` classes to style our
-      content. These classes are defined in the custom CSS file
-      (`my_app/static/my_app/style/pdf_page.css`) that we rendered
-      in the `<style>` tag.
-      <br/><br/>
 
-2. Create a new view to render the PDF:
+3. Add the new URL patterns to your project's `urls.py`:
 
-   ```python
-   # my_app/views.py
-   
-   from django_pdf_view.pdf import PDF
-   from django_pdf_view.services import create_pdf
-   from django_pdf_view.views.pdf_view import PDFView
-   
-   
-   class MyPDFView(PDFView):
-   
-        def create_pdf(self) -> PDF:
-            return create_pdf(
-                template_name='my_app/pdf_page.html',
-                title='My PDF',
-                context={
-                    'title': 'My PDF Single Page Title',
-                    'text': 'My PDF Single Page Text',
-                }
-            )
-   ```
-   **_Breakdown_**:
-    - We create a new view class `MyPDFView` that extends `PDFView`.
-    - We implement abstract method `create_pdf` to return a simple
-      single-page PDF object by providing a `template_name` for the
-      PDF page, a `title` (optional) for the PDF document, and a
-      `context` (optional) for the PDF page template.
-      <br/><br/>
-
-3. Add the new URL pattern to your project's `urls.py`:
-
-   ```python
-   from django.urls import path
-   from my_app.views import MyPDFView
-   
-   urlpatterns = [
-        ...
-        path('my-pdf/', MyPDFView.as_view(), name='my_pdf'),
-        ...
-   ]
-   ```
+    ```python
+    # my_app/urls.py    
+    
+    from django.urls import path
+    from my_app.views import MyPDFView
+    
+    urlpatterns = [
+        path('pdf-file/', MyPDFView.as_view(response_type='pdf'), name='pdf-file'),
+        path('pdf-html/', MyPDFView.as_view(response_type='html'), name='pdf-html'),
+        path('pdf-download/', MyPDFView.as_view(response_type='download'), name='pdf-download'),
+    ]
+    ```
    <br/>
 
-4. Visit [http://localhost:8000/my-pdf/](http://localhost:8000/my-pdf/)
-   in your browser.
-    - To download the PDF, append `?download=true` to the URL:
-      [http://localhost:8000/my-pdf/?download=true](http://localhost:8000/my-pdf/?download=true)
-    - To view the HTML version, append `?html=true` to the URL:
-      [http://localhost:8000/my-pdf/?html=true](http://localhost:8000/my-pdf/?html=true)
-      <br/><br/>
+4. Visit the belows listed URLs:
 
-## Advanced Usage
-
-To have more control over the PDF generation process, instead of
-using the `create_pdf` helper function, you can create a PDF object
-manually and add pages to it:
-
-```python
-from django_pdf_view.pdf import PDF
-
-pdf = PDF(
-    template_name='my_app/pdf.html',
-    title='My PDF Document',
-    language='rs',
-    filename='my-pdf.pdf',
-)
-# Add first page:
-pdf.add_page(
-    template_name='my_app/pdf_page_1.html',
-    with_wrapper_html=False,
-    context={
-        'title': 'Page 1 Title',
-        'text': 'Page 1 Text',
-    }
-)
-# Add second page:
-pdf.add_page(
-    template_name='my_app/pdf_page_2.html',
-    with_wrapper_html=False,
-    context={
-        'title': 'Page 2 Title',
-        'text': 'Page 2 Text',
-    }
-)
-
-```
-
-**_Breakdown_**:
-
-- We create a new `PDF` object with a custom `template_name` (optional)
-  for the document, a `title` (optional) for the document, a `language`
-  (optional) for the document, and a `filename` (optional) for the
-  PDF file.
-- We add two pages to the PDF object by providing a `template_name`
-  for each page, `with_wrapper_html=False` (optional) to omit wrapper
-  HTML that is added to each page, and a `context` (optional) for
-  each page template.
+- To view the PDF
+  file: [http://localhost:8000/pdf-file/](http://localhost:8000/pdf-file/)
+- To view the
+  HTML: [http://localhost:8000/pdf-html/](http://localhost:8000/pdf-html/)
+- To download the PDF
+  file: [http://localhost:8000/pdf-download/](http://localhost:8000/pdf-download/)
 
 ### Default template context
 
@@ -232,36 +116,19 @@ pdf.add_page(
     - `page_number`: Number of the PDF page.
     - `total_pages`: Total number of pages in the PDF document.
 
-### Template tags & filters
+### `svg` template tag
 
-There are some useful template tags and filters provided by the
-`django-pdf-view` package that can be used in your PDF templates:
+`svg` template tag is provided by the `django-pdf-view` package. This template
+tag can be used to include SVG images in the PDF document.
 
-- `css` template filter
-    ```html
-   {% load css %}   
-       
-   <style>
-       {{ 'path/to/style.css'|css }}
-   </style>
-    ```
-- `svg` template tag
-    ```html
-   {% load svg %}
-   
-   {% svg 'path/to/image.svg' %}
-    ```
+**Usage example**:
 
-### Custom template for PDF document
+```html
+{% load svg %}
 
-If we decide to use our own template for the PDF document, we need
-to include `{{ pages_html|safe }}` in the template to render the
-content of the PDF pages.
+<!-- Some HTML content -->
 
-### Custom CSS for PDF document
+{% svg 'path/to/image.svg' %}
 
-To add some global styles to the PDF document that will be
-applied to all pages, we can define it directly in `<style>`
-(inside `<head>` tag) in the PDF document template. Alternatively,
-we can define it in a separate CSS file and render it in the
-template using the `{{ 'my_app/style/pdf.css'|css }}` template tag.
+<!-- Some more HTML content -->
+```
