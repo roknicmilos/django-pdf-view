@@ -109,12 +109,10 @@ template.
 ### Default template context
 
 - PDF document:
-    - `pages_html`: HTML content of all pages.
     - `title`: Title of the PDF document (used in `<title>` tag).
-- PDF page:
-    - `title`: Title of the PDF page.
-    - `page_number`: Number of the PDF page.
-    - `total_pages`: Total number of pages in the PDF document.
+    - `css`: Content of the CSS files specified in the `css_paths` attribute.
+    - `content`: Content of the HTML template.
+    - `response_type`: Type of the response (`pdf`, `html` or `download`).
 
 ### `svg` template tag
 
