@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from django_pdf_view.pdf import PDF
-from django_pdf_view.views import MultiPageExamplePDFView
+from django_pdf_view.views.examples import MultiPageExamplePDFView
 
 
 class TestMultiPageExamplePDFView(TestCase):
