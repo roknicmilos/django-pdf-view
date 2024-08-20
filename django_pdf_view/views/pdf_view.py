@@ -19,20 +19,9 @@ class PDFView(View):
     def as_view(cls, response_type: ResponseType = None, **initkwargs):
         return super().as_view(response_type=response_type, **initkwargs)
 
-    def __init__(self, *args, response_type: ResponseType = None, **kwargs):
+    def __init__(self, *args, response_type: ResponseType = 'pdf', **kwargs):
         super().__init__(*args, **kwargs)
         self.response_type = response_type
-
-    def setup(self, request, *args, **kwargs):
-        super().setup(request, *args, **kwargs)
-        if self.response_type:
-            pass
-        elif self.request.GET.get('html') == 'true':
-            self.response_type = 'html'
-        elif self.request.GET.get('download') == 'true':
-            self.response_type = 'download'
-        else:
-            self.response_type = 'pdf'
 
     def get(self, *args, **kwargs):
         if self.response_type == 'html':
