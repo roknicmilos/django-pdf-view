@@ -4,7 +4,6 @@ from django.http import FileResponse
 from django.test import TestCase
 from django.urls import reverse
 
-from django_pdf_view.pdf import PDF
 from django_pdf_view.views.examples import SinglePageExamplePDFView
 
 
