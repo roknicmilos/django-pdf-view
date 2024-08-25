@@ -21,7 +21,7 @@ class TestMultiPageExamplePDFView(TestCase):
         self.assertEqual(
             pdf._css_paths,
             [
-                PDF.base_css_path,
+                'django_pdf_view/css/pdf.css',
                 *MultiPageExamplePDFView.css_paths,
             ]
         )

@@ -31,7 +31,7 @@ class TestPDF(TestCase):
         mock_get_context.return_value = {}
         actual_html = pdf.render_html()
         expected_html = render_to_string(
-            template_name=PDF.base_template_name,
+            template_name='django_pdf_view/pdf.html',
             context=mock_get_context.return_value
         )
         self.assertEqual(actual_html, expected_html)
@@ -84,6 +84,6 @@ class TestPDF(TestCase):
         self.assertEqual(context, {
             'content': mock_render_to_string.return_value,
             'title': 'pdf',
-            'css': render_css(PDF.base_css_path),
+            'css': render_css('django_pdf_view/css/pdf.css'),
             **extra_context,
         })

@@ -3,14 +3,22 @@
 {% get_current_language as CURRENT_LANGUAGE_CODE %}
 
 <!DOCTYPE html>
-<html lang="{{ CURRENT_LANGUAGE_CODE }}">
+<html {% block html_attrs %}lang="{{ CURRENT_LANGUAGE_CODE }}"{% endblock html_attrs %}>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <style>{{ css }}</style>
+    {% block title %}
+        <title>{{ title }}</title>
+    {% endblock title %}
+    {% block metatags %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock metatags %}
+    {% block style %}
+        <style>{{ css }}</style>
+    {% endblock style %}
 </head>
-<body>
-{{ content }}
+<body {% block body_attrs %}{% endblock body_attrs %}>
+{% block content %}
+    {{ content }}
+{% endblock content %}
 </body>
 </html>

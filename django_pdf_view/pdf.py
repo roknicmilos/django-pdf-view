@@ -9,12 +9,11 @@ from django_pdf_view.utils import render_css
 
 
 class PDF:
-    base_template_name = 'django_pdf_view/pdf.html'
-    base_css_path = 'django_pdf_view/css/pdf.css'
 
     def __init__(
         self,
         template_name: str,
+        base_template_name: str = 'django_pdf_view/pdf.html',
         language: str = None,
         filename: str = None,
         title: str = None,
@@ -22,12 +21,14 @@ class PDF:
         css_paths: list = None,  # file or directory paths
     ):
         self.template_name = template_name
+        self.base_template_name = base_template_name
         self.language = language or translation.get_language()
         self._filename = filename
         self._title = title
         self._context = context or {}
         self._css_paths = css_paths or []
-        self._css_paths.insert(0, self.base_css_path)
+        # Add the base CSS path to the beginning of the list:
+        self._css_paths.insert(0, 'django_pdf_view/css/pdf.css')
         self._in_memory_pdf = None
 
     @property
