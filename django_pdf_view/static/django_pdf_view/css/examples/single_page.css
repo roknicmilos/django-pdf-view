@@ -5,4 +5,10 @@
 .page h1 {
     padding: 90px;
     margin: 0;
+
+    @media only screen and (max-width: 800px) {
+        padding: 30px;
+        font-size: 22px;
+        text-align: center;
+    }
 }
