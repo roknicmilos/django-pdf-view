@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-pdf-view"
-version = "2.1.0"
+version = "2.2.0"
 description = "Django app for seamlessly displaying and downloading PDF documents in browser"
 authors = ["Miloš Roknić <roknic.milos.994@gmail.com>"]
 maintainers = ["Miloš Roknić <roknic.milos.994@gmail.com>"]
