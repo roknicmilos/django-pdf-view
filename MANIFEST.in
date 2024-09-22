@@ -1,0 +1,23 @@
+# Include all files from the django_pdf_view package
+graft django_pdf_view
+
+# Exclude the tests file
+exclude django_pdf_view/tests/*
+
+# Exclude specific directories and files that should not be part of the package
+prune core
+prune media
+prune htmlcov
+
+# Exclude specific file types that are not needed
+exclude *.pyc
+exclude *.pyo
+exclude .coverage
+exclude db.sqlite3
+exclude .gitignore
+exclude MANIFEST.in
+exclude poetry.lock
+exclude pyproject.toml
+exclude tox.ini
+exclude conftest.py
+exclude development.md

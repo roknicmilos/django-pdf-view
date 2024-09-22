@@ -3,7 +3,7 @@
 
 version: 2
 updates:
-  - package-ecosystem: "pip"
-    directory: "/requirements"
+  - package-ecosystem: "poetry"
+    directory: "./"
     schedule:
       interval: "daily"

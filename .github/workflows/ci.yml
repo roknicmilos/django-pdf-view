@@ -6,8 +6,8 @@ on:
       - '**'  # Run on all branches
 
 jobs:
-  lint:
-    name: Lint
+  ci:
+    name: CI
     runs-on: ubuntu-latest
 
     steps:
@@ -19,46 +19,18 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
-        run: pip install -r requirements/dev.txt
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Install project dependencies
+        run: poetry install
 
       - name: Run linter
-        run: flake8 . && echo "Linting passed"
+        run: poetry run flake8 . && echo "Linting passed"
 
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        python-version: [ '3.10', '3.11', '3.12' ]
-        django-version: [ '4.0', '5.0' ]
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wkhtmltopdf
-          pip install django==${{ matrix.django-version }}
-          pip install -r requirements/base.txt
-
-      - name: Run migrations
-        run: python3 manage.py migrate
-
-      - name: Prepare environment variables
-        run: |
-          echo "PYTHON_VERSION=${{ matrix.python-version }}" >> $GITHUB_ENV
-          echo "DJANGO_VERSION=${{ matrix.django-version }}" >> $GITHUB_ENV
-          echo "PYTHON_ENV=$(echo ${{ matrix.python-version }} | tr -d '.')" >> $GITHUB_ENV
-          echo "DJANGO_ENV=$(echo ${{ matrix.django-version }} | tr -d '.')" >> $GITHUB_ENV
+      - name: Install wkhtmltopdf
+        run: sudo apt-get update && sudo apt-get install -y wkhtmltopdf
 
       - name: Run tests
-        run: tox -e py${PYTHON_ENV}-django${DJANGO_ENV}
+        run: poetry run pytest
