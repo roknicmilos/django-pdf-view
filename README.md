@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/roknicmilos/django-pdf-view.svg)](https://github.com/roknicmilos/django-pdf-view/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/roknicmilos/django-pdf-view.svg)](https://github.com/<username>/<repository>/issues)
+[![codecov](https://codecov.io/github/roknicmilos/django-pdf-view/graph/badge.svg?token=VF1XVECK7P)](https://codecov.io/github/roknicmilos/django-pdf-view)
 
 ## Purpose
 
