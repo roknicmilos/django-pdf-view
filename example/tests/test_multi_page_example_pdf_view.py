@@ -2,7 +2,7 @@ from django.http import FileResponse
 from django.test import TestCase
 from django.urls import reverse
 
-from django_pdf_view.views.examples import MultiPageExamplePDFView
+from example.views import MultiPageExamplePDFView
 
 
 class TestMultiPageExamplePDFView(TestCase):

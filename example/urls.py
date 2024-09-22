@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from django_pdf_view.views.examples import (
+from example.views import (
     SinglePageExamplePDFView as SPView,
     MultiPageExamplePDFView as MPView,
 )
