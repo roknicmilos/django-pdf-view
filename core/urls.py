@@ -5,6 +5,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(
         'examples/',
-        include('django_pdf_view.urls', namespace='examples')
+        include('example.urls', namespace='examples')
     ),
 ]

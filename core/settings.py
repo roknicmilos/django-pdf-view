@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_pdf_view',
+    'django_pdf_view',  # main app
+    'example',  # test app
 ]
 
 MIDDLEWARE = [
