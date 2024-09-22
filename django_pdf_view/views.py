@@ -39,7 +39,11 @@ class PDFView(View):
         browser without downloading it.
         """
         pdf = self.create_pdf()
-        return FileResponse(pdf.in_memory_pdf, filename=pdf.filename)
+        return FileResponse(
+            pdf.in_memory_pdf,
+            filename=pdf.filename,
+            content_type='application/pdf'
+        )
 
     @with_tmp_env_var('QT_QPA_PLATFORM', 'offscreen')
     def download_pdf_response(self) -> FileResponse:
@@ -48,7 +52,11 @@ class PDFView(View):
         displaying it in the browser.
         """
         pdf = self.create_pdf()
-        response = FileResponse(pdf.in_memory_pdf, filename=pdf.filename)
+        response = FileResponse(
+            pdf.in_memory_pdf,
+            filename=pdf.filename,
+            content_type='application/pdf'
+        )
         content_disposition = f'attachment; filename="{pdf.filename}"'
         response['Content-Disposition'] = content_disposition
         return response
