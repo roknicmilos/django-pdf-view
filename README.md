@@ -144,6 +144,34 @@ tag can be used to include SVG images in the PDF document.
 <!-- Some more HTML content -->
 ```
 
+You can also dynamically set a custom color to the SVG by adding
+`data-dynamic-color="true"` to elements in the SVG file that contain the `fill`
+attribute.
+
+**Example**:
+
+```html
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path fill="white" data-dynamic-color="true" .../>
+</svg>
+```
+
+and then in the template:
+
+```html
+{% load svg %}
+
+<!-- Some HTML content -->
+
+{% svg 'path/to/image.svg' 'black' %}
+
+<!-- Some more HTML content -->
+```
+
+In the above example, the fill color of the SVG will be changed from white to
+black.
+
 ## Bugs/Requests
 
 If you encounter any bugs or have any requests, please use
