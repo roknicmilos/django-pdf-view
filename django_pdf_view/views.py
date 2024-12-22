@@ -35,8 +35,8 @@ class PDFView(View):
     @with_tmp_env_var('QT_QPA_PLATFORM', 'offscreen')
     def pdf_response(self) -> FileResponse:
         """
-        This response will display the PDF in the
-        browser without downloading it.
+        This response will display the PDF in the browser without
+        downloading it.
         """
         pdf = self.create_pdf()
         return FileResponse(
@@ -48,8 +48,8 @@ class PDFView(View):
     @with_tmp_env_var('QT_QPA_PLATFORM', 'offscreen')
     def download_pdf_response(self) -> FileResponse:
         """
-        This response will download the PDF without
-        displaying it in the browser.
+        This response will download the PDF without displaying it
+        in the browser.
         """
         pdf = self.create_pdf()
         response = FileResponse(
@@ -63,8 +63,7 @@ class PDFView(View):
 
     def html_response(self) -> HttpResponse:
         """
-        This response will display the HTML in the
-        browser.
+        This response will display the HTML in the browser.
         """
         pdf = self.create_pdf()
         return HttpResponse(
@@ -79,6 +78,7 @@ class PDFView(View):
             filename=self.get_filename(),
             context=self.get_context(),
             css_paths=self.get_css_paths(),
+            request=self.request,
         )
 
     def get_template_name(self) -> str:

@@ -19,6 +19,7 @@ class PDF:
         title: str = None,
         context: dict = None,
         css_paths: list = None,  # file or directory paths
+        request=None,
     ):
         self.template_name = template_name
         self.base_template_name = base_template_name
@@ -30,6 +31,7 @@ class PDF:
         # Add the base CSS path to the beginning of the list:
         self._css_paths.insert(0, 'django_pdf_view/css/pdf.css')
         self._in_memory_pdf = None
+        self._request = request
 
     @property
     def filename(self) -> str:
@@ -47,7 +49,8 @@ class PDF:
     def render_html(self) -> str:
         return render_to_string(
             template_name=self.base_template_name,
-            context=self.get_context()
+            context=self.get_context(),
+            request=self._request,
         )
 
     def get_context(self) -> dict:

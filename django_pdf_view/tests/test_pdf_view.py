@@ -17,6 +17,7 @@ class TestPDFView(TestCase):
 
     def test_create_pdf(self):
         view = ConcretePDFView()
+        view.request = self.request_factory.get('/')
         pdf = view.create_pdf()
         self.assertEqual(pdf.template_name, ConcretePDFView.template_name)
         self.assertEqual(pdf.get_filename(), ConcretePDFView.filename)
@@ -24,12 +25,14 @@ class TestPDFView(TestCase):
 
     def test_html_response(self):
         view = ConcretePDFView()
+        view.request = self.request_factory.get('/')
         response = view.html_response()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'text/html')
 
     def test_pdf_response(self):
         view = ConcretePDFView()
+        view.request = self.request_factory.get('/')
         response = view.pdf_response()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'application/pdf')
@@ -40,6 +43,7 @@ class TestPDFView(TestCase):
 
     def test_download_pdf_response(self):
         view = ConcretePDFView()
+        view.request = self.request_factory.get('/')
         response = view.download_pdf_response()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response['Content-Type'], 'application/pdf')
