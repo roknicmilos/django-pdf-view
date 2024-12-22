@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-pdf-view"
-version = "3.0.1"
+version = "3.0.2"
 description = "Django app for seamlessly displaying and downloading PDF documents in browser"
 authors = ["Miloš Roknić <roknic.milos.994@gmail.com>"]
 maintainers = ["Miloš Roknić <roknic.milos.994@gmail.com>"]
@@ -29,8 +29,8 @@ packages = [
 
 [tool.poetry.urls]
 homepage = "https://github.com/roknicmilos/django-pdf-view"
-repository = "https://github.com/roknicmilos/django-pdf-fixtures/"
-documentation = "https://github.com/roknicmilos/django-pdf-fixtures/blob/main/README.md"
+repository = "https://github.com/roknicmilos/django-pdf-view/"
+documentation = "https://github.com/roknicmilos/django-pdf-view/blob/main/README.md"
 issues = "https://github.com/roknicmilos/django-pdf-view/issues"
 
 [tool.poetry.dependencies]
