@@ -23,6 +23,10 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
+packages = [
+    { include = "pdf_view" }
+]
+
 [tool.poetry.urls]
 homepage = "https://github.com/roknicmilos/django-pdf-view"
 repository = "https://github.com/roknicmilos/django-pdf-fixtures/"
