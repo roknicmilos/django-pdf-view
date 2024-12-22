@@ -2,7 +2,7 @@ from functools import wraps
 from typing import Callable, Any
 from django.utils import translation
 
-from django_pdf_view.context_managers import tmp_env_var
+from pdf_view.context_managers import tmp_env_var
 
 
 def override_language(method: Callable) -> Callable:

@@ -1,8 +1,8 @@
-# Include all files from the django_pdf_view package
-graft django_pdf_view
+# Include all files from the pdf_view package
+graft pdf_view
 
 # Exclude the tests file
-exclude django_pdf_view/tests/*
+exclude pdf_view/tests/*
 
 # Exclude specific directories and files that should not be part of the package
 prune core

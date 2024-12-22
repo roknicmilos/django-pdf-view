@@ -1,7 +1,7 @@
 import os
 from django.test import TestCase
 
-from django_pdf_view.decorators import with_tmp_env_var
+from pdf_view.decorators import with_tmp_env_var
 
 
 class TestWithTmpEnvVar(TestCase):

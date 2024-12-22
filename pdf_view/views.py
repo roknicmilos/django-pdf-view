@@ -3,8 +3,8 @@ from typing import Literal
 from django.http import HttpResponse, FileResponse
 from django.views import View
 
-from django_pdf_view.decorators import with_tmp_env_var
-from django_pdf_view.pdf import PDF
+from pdf_view.decorators import with_tmp_env_var
+from pdf_view.pdf import PDF
 
 
 class PDFView(View):
