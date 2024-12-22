@@ -73,28 +73,20 @@ class PDFView(View):
         )
 
     def create_pdf(self) -> PDF:
-        return self.pdf_class(
-            template_name=self.get_template_name(),
-            title=self.get_title(),
-            filename=self.get_filename(),
-            context=self.get_context(),
-            css_paths=self.get_css_paths(),
-            request=self.request,
-        )
+        kwargs = self.get_pdf_kwargs()
+        return self.pdf_class(**kwargs)
 
-    def get_template_name(self) -> str:
-        return self.template_name
-
-    def get_title(self) -> str:
-        return self.title
-
-    def get_filename(self) -> str:
-        return self.filename
+    def get_pdf_kwargs(self) -> dict:
+        return {
+            'template_name': self.template_name,
+            'title': self.title,
+            'filename': self.filename,
+            'context': self.get_context(),
+            'css_paths': self.css_paths.copy(),
+            'request': self.request,
+        }
 
     def get_context(self) -> dict:
         return {
             'response_type': self.response_type,
         }
-
-    def get_css_paths(self) -> list[str]:
-        return self.css_paths.copy()
