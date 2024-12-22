@@ -8,6 +8,7 @@ from pdf_view.pdf import PDF
 
 
 class PDFView(View):
+    pdf_class: type[PDF] = PDF
     ResponseType = Literal['pdf', 'html', 'download']
     response_type: ResponseType | None = None
     title: str = None
@@ -20,7 +21,7 @@ class PDFView(View):
         return super().as_view(response_type=response_type, **initkwargs)
 
     def __init__(self, *args, response_type: ResponseType = 'pdf', **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)
         self.response_type = response_type
 
     def get(self, *args, **kwargs):
@@ -72,7 +73,7 @@ class PDFView(View):
         )
 
     def create_pdf(self) -> PDF:
-        return PDF(
+        return self.pdf_class(
             template_name=self.get_template_name(),
             title=self.get_title(),
             filename=self.get_filename(),
