@@ -1,4 +1,4 @@
-from django_pdf_view.views import PDFView
+from pdf_view.views import PDFView
 
 
 class SinglePageExamplePDFView(PDFView):

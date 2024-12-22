@@ -31,14 +31,14 @@ urlpatterns = [
     path(
         'single-page/',
         include(
-            (single_page_urlpatterns, 'django_pdf_view'),
+            (single_page_urlpatterns, 'pdf_view'),
             namespace='single_page'
         ),
     ),
     path(
         'multi-page/',
         include(
-            (multi_page_urlpatterns, 'django_pdf_view'),
+            (multi_page_urlpatterns, 'pdf_view'),
             namespace='multi_page'
         ),
     ),

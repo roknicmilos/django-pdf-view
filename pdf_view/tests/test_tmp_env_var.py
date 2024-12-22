@@ -2,7 +2,7 @@ import os
 
 from django.test import TestCase
 
-from django_pdf_view.context_managers import tmp_env_var
+from pdf_view.context_managers import tmp_env_var
 
 
 class TestTmpEnvVar(TestCase):

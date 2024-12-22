@@ -1,10 +1,10 @@
 from django.test import TestCase, RequestFactory
 
-from django_pdf_view.views import PDFView
+from pdf_view.views import PDFView
 
 
 class ConcretePDFView(PDFView):
-    template_name = 'django_pdf_view/pdf.html'
+    template_name = 'pdf_view/pdf.html'
     filename = 'test.pdf'
     title = 'Test PDF'
 

@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_pdf_view',  # main app
+    'pdf_view',  # main app
     'example',  # test app
 ]
 
@@ -109,7 +109,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'django_pdf_view', 'static'),
+    os.path.join(BASE_DIR, 'pdf_view', 'static'),
 ]
 
 # Default primary key field type

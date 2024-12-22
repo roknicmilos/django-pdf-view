@@ -4,8 +4,8 @@ from django.template.loader import render_to_string
 from django.utils import translation
 from pdfkit import from_string
 
-from django_pdf_view.decorators import override_language
-from django_pdf_view.utils import render_css
+from pdf_view.decorators import override_language
+from pdf_view.utils import render_css
 
 
 class PDF:
@@ -13,7 +13,7 @@ class PDF:
     def __init__(
         self,
         template_name: str,
-        base_template_name: str = 'django_pdf_view/pdf.html',
+        base_template_name: str = 'pdf_view/pdf.html',
         language: str = None,
         filename: str = None,
         title: str = None,
@@ -29,7 +29,7 @@ class PDF:
         self._context = context or {}
         self._css_paths = css_paths or []
         # Add the base CSS path to the beginning of the list:
-        self._css_paths.insert(0, 'django_pdf_view/css/pdf.css')
+        self._css_paths.insert(0, 'pdf_view/css/pdf.css')
         self._in_memory_pdf = None
         self._request = request
 

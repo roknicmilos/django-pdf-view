@@ -1,7 +1,7 @@
 from unittest.mock import patch, mock_open as open_mock
 from django.test import SimpleTestCase
 
-from django_pdf_view.utils import render_css
+from pdf_view.utils import render_css
 
 
 class TestRenderCss(SimpleTestCase):
@@ -10,7 +10,7 @@ class TestRenderCss(SimpleTestCase):
         super().setUp()
 
         self.finders_find_patcher = patch(
-            target='django_pdf_view.utils.finders.find'
+            target='pdf_view.utils.finders.find'
         )
         self.mock_finders_find = self.finders_find_patcher.start()
 

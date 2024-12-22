@@ -13,7 +13,7 @@ class TestSinglePageExamplePDFView(TestCase):
     def setUpTestData(cls):
         super().setUpTestData()
         cls.render_css_patcher = patch(
-            target='django_pdf_view.pdf.render_css',
+            target='pdf_view.pdf.render_css',
             return_value=''
         )
         cls.render_css_patcher.start()
@@ -33,7 +33,7 @@ class TestSinglePageExamplePDFView(TestCase):
         self.assertEqual(
             pdf._css_paths,
             [
-                'django_pdf_view/css/pdf.css',
+                'pdf_view/css/pdf.css',
                 *SinglePageExamplePDFView.css_paths,
             ]
         )

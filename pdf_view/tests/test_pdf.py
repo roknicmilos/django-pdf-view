@@ -4,8 +4,8 @@ from io import BytesIO
 
 from django.template.loader import render_to_string
 
-from django_pdf_view.pdf import PDF
-from django_pdf_view.utils import render_css
+from pdf_view.pdf import PDF
+from pdf_view.utils import render_css
 
 
 class TestPDF(TestCase):
@@ -22,7 +22,7 @@ class TestPDF(TestCase):
         self.assertEqual(pdf.filename, 'test.pdf')
         self.assertEqual(pdf._title, 'Test PDF')
 
-    @patch('django_pdf_view.pdf.PDF.get_context')
+    @patch('pdf_view.pdf.PDF.get_context')
     def test_render_html(self, mock_get_context):
         pdf = PDF(
             template_name='pdf.html',
@@ -31,15 +31,15 @@ class TestPDF(TestCase):
         mock_get_context.return_value = {}
         actual_html = pdf.render_html()
         expected_html = render_to_string(
-            template_name='django_pdf_view/pdf.html',
+            template_name='pdf_view/pdf.html',
             context=mock_get_context.return_value
         )
         self.assertEqual(actual_html, expected_html)
 
-    @patch('django_pdf_view.pdf.from_string')
+    @patch('pdf_view.pdf.from_string')
     def test_in_memory_pdf(self, mock_from_string):
         mock_from_string.return_value = b'PDF content'
-        pdf = PDF(template_name='django_pdf_view/pdf.html')
+        pdf = PDF(template_name='pdf_view/pdf.html')
         in_memory_pdf = pdf.in_memory_pdf
         self.assertIsInstance(in_memory_pdf, BytesIO)
         self.assertEqual(in_memory_pdf.getvalue(), b'PDF content')
@@ -70,7 +70,7 @@ class TestPDF(TestCase):
         pdf_without_title = PDF(template_name='document.html')
         self.assertEqual(pdf_without_title.get_title(), 'document')
 
-    @patch('django_pdf_view.pdf.render_to_string')
+    @patch('pdf_view.pdf.render_to_string')
     def test_get_context(self, mock_render_to_string):
         mock_render_to_string.return_value = 'content'
         extra_context = {
@@ -84,6 +84,6 @@ class TestPDF(TestCase):
         self.assertEqual(context, {
             'content': mock_render_to_string.return_value,
             'title': 'pdf',
-            'css': render_css('django_pdf_view/css/pdf.css'),
+            'css': render_css('pdf_view/css/pdf.css'),
             **extra_context,
         })

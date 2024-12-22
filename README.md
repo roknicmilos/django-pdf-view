@@ -53,7 +53,7 @@ Add `django-pdf-view` to your `INSTALLED_APPS` in `settings.py`:
 ```python
 INSTALLED_APPS = [
     ...
-    'django_pdf_view',
+    'pdf_view',
     ...
 ]
 ```
@@ -68,7 +68,7 @@ template.
     ```python
    # my_app/views.py    
         
-   from django_pdf_view.views.pdf_view import PDFView
+   from pdf_view.views.pdf_view import PDFView
         
         
    class MyPDFView(PDFView):

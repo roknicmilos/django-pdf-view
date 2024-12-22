@@ -1,12 +1,12 @@
 from django.test import TestCase
 from unittest.mock import patch, mock_open
 
-from django_pdf_view.templatetags.svg import svg
+from pdf_view.templatetags.svg import svg
 
 
 class TestSvgTemplateTag(TestCase):
 
-    @patch(target='django_pdf_view.templatetags.svg.finders.find')
+    @patch(target='pdf_view.templatetags.svg.finders.find')
     def test_svg_with_original_color(self, mock_finders_find):
         """
         Test that the original SVG is returned when no color is provided.
@@ -22,7 +22,7 @@ class TestSvgTemplateTag(TestCase):
             mock_file.assert_called_once_with(svg_file_path, 'r')
             self.assertEqual(result, mocked_file_content)
 
-    @patch(target='django_pdf_view.templatetags.svg.finders.find')
+    @patch(target='pdf_view.templatetags.svg.finders.find')
     def test_svg_with_custom_color(self, mock_finders_find):
         """
         Test that the `fill` attribute of elements with
@@ -56,7 +56,7 @@ class TestSvgTemplateTag(TestCase):
         self.assertEqual(result, expected_result)
 
     @patch(
-        target='django_pdf_view.templatetags.svg.finders.find',
+        target='pdf_view.templatetags.svg.finders.find',
         return_value=None
     )
     def test_svg_file_not_found(self, _):
