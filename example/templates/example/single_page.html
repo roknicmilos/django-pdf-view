@@ -1,5 +1,11 @@
-{% load i18n %}
+{% load i18n svg %}
 
 <div class="page page--blue">
     <h1>{% trans "Single-page PDF document" %}</h1>
+    <div class="svg">
+        {% svg 'example/svg/svg.svg' 'yellow' %}
+    </div>
+    <div class="svg">
+        {% svg 'example/svg/pdf.svg' 'red' %}
+    </div>
 </div>
