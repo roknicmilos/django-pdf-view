@@ -30,13 +30,13 @@ class TestSvgTemplateTag(TestCase):
         """
         svg_file_path = '/path/to/static/file.svg'
         mock_finders_find.return_value = svg_file_path
-        mocked_file_content = """
+        mocked_file_content = '''
             <svg>
                 <path fill="red" data-dynamic-color="true" />
                 <circle data-dynamic-color="true" fill="blue" />
                 <circle fill="green" />
             </svg>
-        """
+        '''
         custom_color = 'yellow'
 
         with patch(
@@ -46,13 +46,13 @@ class TestSvgTemplateTag(TestCase):
             result = svg('file.svg', custom_color)
 
         mock_file.assert_called_once_with(svg_file_path, 'r')
-        expected_result = """
+        expected_result = '''
             <svg>
                 <path data-dynamic-color="true" fill="yellow" />
                 <circle data-dynamic-color="true" fill="yellow" />
                 <circle fill="green" />
             </svg>
-        """
+        '''
         self.assertEqual(result, expected_result)
 
     @patch(
