@@ -7,16 +7,53 @@ from django_pdf_view.templatetags.svg import svg
 class TestSvgTemplateTag(TestCase):
 
     @patch(target='django_pdf_view.templatetags.svg.finders.find')
-    def test_svg_file_found(self, mock_finders_find):
-        mock_finders_find.return_value = '/path/to/static/file.svg'
-        mocked_file_content = '<svg></svg>'
+    def test_svg_with_original_color(self, mock_finders_find):
+        """
+        Test that the original SVG is returned when no color is provided.
+        """
+        svg_file_path = '/path/to/static/file.svg'
+        mock_finders_find.return_value = svg_file_path
+        mocked_file_content = '<svg><path fill="red" /></svg>'
         with patch(
             target='builtins.open',
             new=mock_open(read_data=mocked_file_content)
         ) as mock_file:
             result = svg('file.svg')
-            mock_file.assert_called_once_with('/path/to/static/file.svg', 'r')
+            mock_file.assert_called_once_with(svg_file_path, 'r')
             self.assertEqual(result, mocked_file_content)
+
+    @patch(target='django_pdf_view.templatetags.svg.finders.find')
+    def test_svg_with_custom_color(self, mock_finders_find):
+        """
+        Test that the `fill` attribute of elements with
+        `data-dynamic-color="true"` is updated with the provided color.
+        """
+        svg_file_path = '/path/to/static/file.svg'
+        mock_finders_find.return_value = svg_file_path
+        mocked_file_content = '''
+            <svg>
+                <path fill="red" data-dynamic-color="true" />
+                <circle data-dynamic-color="true" fill="blue" />
+                <circle fill="green" />
+            </svg>
+        '''
+        custom_color = 'yellow'
+
+        with patch(
+            target='builtins.open',
+            new=mock_open(read_data=mocked_file_content)
+        ) as mock_file:
+            result = svg('file.svg', custom_color)
+
+        mock_file.assert_called_once_with(svg_file_path, 'r')
+        expected_result = '''
+            <svg>
+                <path data-dynamic-color="true" fill="yellow" />
+                <circle data-dynamic-color="true" fill="yellow" />
+                <circle fill="green" />
+            </svg>
+        '''
+        self.assertEqual(result, expected_result)
 
     @patch(
         target='django_pdf_view.templatetags.svg.finders.find',

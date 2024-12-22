@@ -10,9 +10,13 @@
 }
 
 .page--green {
-    background-color: lightgreen;
+    background-color: #b0ffb0;
 }
 
 .page--red {
-    background-color: lightcoral;
+    background-color: #ffa9a9;
+}
+
+.svg {
+    margin: 50px 90px;
 }
