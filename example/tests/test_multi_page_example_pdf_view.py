@@ -1,5 +1,5 @@
 from django.http import FileResponse
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
 
 from example.views import MultiPageExamplePDFView
@@ -9,6 +9,8 @@ class TestMultiPageExamplePDFView(TestCase):
 
     def test_create_pdf(self):
         view = MultiPageExamplePDFView()
+        request_factory = RequestFactory()
+        view.request = request_factory.get('/')
         pdf = view.create_pdf()
 
         self.assertEqual(pdf.get_title(), MultiPageExamplePDFView.title)
