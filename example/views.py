@@ -1,3 +1,5 @@
+from django.contrib import messages
+
 from pdf_view.views import PDFView
 
 
@@ -7,7 +9,15 @@ class SinglePageExamplePDFView(PDFView):
     filename = 'single_page_example_pdf.pdf'
     css_paths = [
         'example/css/single_page.css',
+        'example/css/flash_message.css',
     ]
+
+    def get(self, *args, **kwargs):
+        message = (
+            'You are viewing the HTML version of the single page example PDF.'
+        )
+        messages.info(request=self.request, message=message)
+        return super().get(*args, **kwargs)
 
 
 class MultiPageExamplePDFView(PDFView):
@@ -16,4 +26,12 @@ class MultiPageExamplePDFView(PDFView):
     filename = 'multi_page_example_pdf.pdf'
     css_paths = [
         'example/css/multi_page.css',
+        'example/css/flash_message.css',
     ]
+
+    def get(self, *args, **kwargs):
+        message = (
+            'You are viewing the HTML version of the multi page example PDF.'
+        )
+        messages.info(request=self.request, message=message)
+        return super().get(*args, **kwargs)

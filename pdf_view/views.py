@@ -1,5 +1,6 @@
 from typing import Literal
 
+from django.contrib import messages
 from django.http import HttpResponse, FileResponse
 from django.views import View
 
@@ -87,6 +88,13 @@ class PDFView(View):
         }
 
     def get_context(self) -> dict:
-        return {
+        context = {
             'response_type': self.response_type,
         }
+        if self.response_type == 'html':
+            # For some reason, regardless of how template is rendered,
+            # messages collection is empty in the template, so we need
+            # to pass it explicitly.
+            context['messages'] = messages.get_messages(self.request)
+
+        return context
