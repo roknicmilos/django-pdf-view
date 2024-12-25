@@ -1,0 +1,31 @@
+{% load svg %}
+
+{% for message in messages %}
+    <div class="flash-message {% if message.tags %}flash-message--{{ message.tags }}{% endif %} js-flash-message">
+        <p class="flash-message__text">
+            {{ message }}
+        </p>
+        <div class="flash-message__close-button js-flash-message-close-button">
+            {% svg "example/svg/x.svg" %}
+        </div>
+    </div>
+{% endfor %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        prepareFlashMessages();
+    });
+
+    function prepareFlashMessages() {
+        const closeButtons = document.querySelectorAll(".js-flash-message-close-button");
+
+        closeButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                const flashMessage = button.closest(".js-flash-message");
+                if (flashMessage) {
+                    flashMessage.remove();
+                }
+            });
+        });
+    }
+</script>

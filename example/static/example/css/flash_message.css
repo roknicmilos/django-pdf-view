@@ -1,0 +1,48 @@
+.flash-message {
+    position: fixed;
+    top: 20px;
+    left: calc(50% - 250px);
+    margin: 0 auto;
+    height: 70px;
+    width: 500px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e7f0f7;
+    color: black;
+    z-index: 1;
+    animation: slideInFromTop 0.5s ease-out;
+
+    @media only screen and (max-width: 768px) {
+        top: 33px;
+        width: 80%;
+        left: calc(50% - 40%);
+    }
+}
+
+.flash-message--success {
+    background-color: #c9f6cb;
+}
+
+.flash-message--error {
+    background-color: #fababa;
+}
+
+.flash-message__text {
+    width: 100%;
+    margin: 0 0 0 40px;
+    font-weight: 400;
+    text-align: center;
+    font-size: 20px;
+}
+
+.flash-message__close-button {
+    height: 20px;
+    width: 20px;
+    padding: 28px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
